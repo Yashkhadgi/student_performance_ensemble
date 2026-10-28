@@ -340,13 +340,23 @@ elif page == 'Predict Student':
         submitted = st.form_submit_button('✨ Predict Academic Outcomes', use_container_width=True)
 
     if submitted:
-        predicted = predict(reg_name, 'grade', profile)
-        prob = predict(cls_name, 'risk', profile)
+        st.session_state['pred_profile'] = profile.copy()
+        st.session_state['pred_reg'] = reg_name
+        st.session_state['pred_cls'] = cls_name
+        st.session_state['pred_grade'] = predict(reg_name, 'grade', profile)
+        st.session_state['pred_prob'] = predict(cls_name, 'risk', profile)
+
+    if 'pred_profile' in st.session_state:
+        base_prof = st.session_state['pred_profile']
+        r_name = st.session_state['pred_reg']
+        c_name = st.session_state['pred_cls']
+        predicted = st.session_state['pred_grade']
+        prob = st.session_state['pred_prob']
 
         st.markdown('### Model Predictions')
         col1, col2, col3 = st.columns(3)
-        col1.metric('Estimated Final Grade (G3)', f'{predicted:.1f} / 20', help=f'Model: {reg_name}')
-        col2.metric('Model-Estimated Risk Probability', f'{100 * prob:.1f}%', help=f'Model: {cls_name}')
+        col1.metric('Estimated Final Grade (G3)', f'{predicted:.1f} / 20', help=f'Model: {r_name}')
+        col2.metric('Model-Estimated Risk Probability', f'{100 * prob:.1f}%', help=f'Model: {c_name}')
         risk_label = ('Low Risk' if prob < 0.3 else 'Moderate Risk' if prob < 0.65 else 'High Academic Risk')
         col3.metric('Support Priority Band', risk_label)
 
@@ -355,6 +365,84 @@ elif page == 'Predict Student':
             f"**Intervention Recommendation:** Support Priority is **{risk_label}**. "
             "Estimated fail risk corresponds to final grade $G3 < 10$. "
             "Predictions are informative decision-support indicators, not definitive academic judgments."
+        )
+
+        st.markdown('---')
+        st.markdown('### 🎯 Prescriptive Counterfactual Academic Intervention Simulator')
+        st.caption('Explore how adjusting controllable behavioral and academic factors can pull this student out of risk.')
+
+        cf_c1, cf_c2, cf_c3 = st.columns(3)
+        with cf_c1:
+            cf_study = st.select_slider(
+                'Simulated Weekly Study Time',
+                options=[1, 2, 3, 4],
+                value=int(base_prof['studytime']),
+                format_func=lambda n: {1: '< 2 hours', 2: '2–5 hours', 3: '5–10 hours', 4: '> 10 hours'}[n],
+                key='cf_study'
+            )
+            cf_absences = st.slider(
+                'Simulated Absences (Target Reduction)',
+                0, int(max(1, base_prof['absences'])),
+                int(max(0, base_prof['absences'] - 4)),
+                key='cf_abs'
+            )
+        with cf_c2:
+            cf_schoolsup = st.selectbox(
+                'Provide Extra School Tutoring',
+                ['yes', 'no'],
+                index=0 if base_prof.get('schoolsup') == 'yes' else 1,
+                key='cf_schoolsup'
+            )
+            cf_famsup = st.selectbox(
+                'Encourage Family Academic Support',
+                ['yes', 'no'],
+                index=0 if base_prof.get('famsup') == 'yes' else 1,
+                key='cf_famsup'
+            )
+        with cf_c3:
+            cf_higher = st.selectbox(
+                'Targeting Higher Education Ambition',
+                ['yes', 'no'],
+                index=0 if base_prof.get('higher') == 'yes' else 1,
+                key='cf_higher'
+            )
+            if scenario == 'grade_informed':
+                cf_g2 = st.slider('Target G2 Improvement', 0, 20, int(min(20, base_prof.get('G2', 10) + 2)), key='cf_g2')
+
+        # Compute counterfactual prediction
+        cf_profile = base_prof.copy()
+        cf_profile['studytime'] = cf_study
+        cf_profile['absences'] = cf_absences
+        cf_profile['schoolsup'] = cf_schoolsup
+        cf_profile['famsup'] = cf_famsup
+        cf_profile['higher'] = cf_higher
+        if scenario == 'grade_informed':
+            cf_profile['G2'] = cf_g2
+
+        cf_predicted = predict(r_name, 'grade', cf_profile)
+        cf_prob = predict(c_name, 'risk', cf_profile)
+
+        grade_delta = cf_predicted - predicted
+        risk_delta = (cf_prob - prob) * 100
+
+        st.markdown('#### Counterfactual Simulation Results')
+        res_c1, res_c2, res_c3 = st.columns(3)
+        res_c1.metric('Simulated Final Grade (G3)', f'{cf_predicted:.1f} / 20', delta=f'{grade_delta:+.1f} pts')
+        res_c2.metric('Simulated Failure Risk', f'{100 * cf_prob:.1f}%', delta=f'{risk_delta:+.1f}%', delta_color='inverse')
+        cf_risk_label = ('Low Risk (<30%)' if cf_prob < 0.3 else 'Moderate Risk (30-65%)' if cf_prob < 0.65 else 'High Risk (>65%)')
+        res_c3.metric('New Support Status', cf_risk_label)
+
+        # Plotly comparison
+        cf_chart_df = pd.DataFrame([
+            {'Scenario': 'Current Baseline', 'Metric': 'Final Grade (0-20)', 'Value': predicted},
+            {'Scenario': 'Simulated Intervention', 'Metric': 'Final Grade (0-20)', 'Value': cf_predicted},
+            {'Scenario': 'Current Baseline', 'Metric': 'Failure Risk (%)', 'Value': prob * 100},
+            {'Scenario': 'Simulated Intervention', 'Metric': 'Failure Risk (%)', 'Value': cf_prob * 100},
+        ])
+        st.plotly_chart(
+            px.bar(cf_chart_df, x='Metric', y='Value', color='Scenario', barmode='group',
+                   title='Before vs After Academic Intervention Impact', text_auto='.1f'),
+            use_container_width=True
         )
 
 
@@ -453,13 +541,35 @@ elif page == 'Model Comparison':
                 fig.add_vline(x=0, line_dash='dash', line_color='red', annotation_text='Zero Error')
                 st.plotly_chart(fig, use_container_width=True)
         else:
+            st.markdown('#### ⚖️ Cost-Sensitive Decision Threshold Tuner')
+            st.caption(
+                'In academic risk prediction, a **False Negative** (a failing student who receives no help) has a much higher societal cost than a **False Positive** (a passing student given extra support). '
+                'Slide the decision threshold below to observe how tuning the cutoff increases Recall and minimizes student dropouts.'
+            )
+            thresh_slider = st.slider('Decision Cutoff Threshold', min_value=0.10, max_value=0.90, value=0.50, step=0.05, key='thresh_slider')
+
+            probs_arr = p.risk_probability.to_numpy()
+            y_act = p.actual.astype(int).to_numpy()
+            y_custom = (probs_arr >= thresh_slider).astype(int)
+
+            t_acc = accuracy_score(y_act, y_custom)
+            t_prec = precision_score(y_act, y_custom, zero_division=0)
+            t_rec = recall_score(y_act, y_custom, zero_division=0)
+            t_f1 = f1_score(y_act, y_custom, zero_division=0)
+
+            m_th1, m_th2, m_th3, m_th4 = st.columns(4)
+            m_th1.metric('Recall (Sensitivity)', f'{t_rec:.1%}', help='Percentage of at-risk students captured')
+            m_th2.metric('Precision', f'{t_prec:.1%}', help='Percentage of flagged students genuinely at risk')
+            m_th3.metric('F1-Score', f'{t_f1:.3f}')
+            m_th4.metric('Accuracy', f'{t_acc:.1%}')
+
             with col_diag1:
-                cm = confusion_matrix(p.actual.astype(int), p.predicted.astype(int), labels=[0, 1])
+                cm = confusion_matrix(y_act, y_custom, labels=[0, 1])
                 fig = px.imshow(
                     cm, text_auto=True,
                     x=['Predicted Not At Risk', 'Predicted At Risk'],
                     y=['Actual Not At Risk', 'Actual At Risk'],
-                    title=f'Held-Out Confusion Matrix — {choice}',
+                    title=f'Confusion Matrix at Threshold {thresh_slider:.2f} — {choice}',
                     color_continuous_scale='Blues'
                 )
                 st.plotly_chart(fig, use_container_width=True)
@@ -472,6 +582,7 @@ elif page == 'Model Comparison':
                     title=f'Risk Probability Separation — {choice}',
                     barmode='overlay', opacity=0.7
                 )
+                fig.add_vline(x=thresh_slider, line_dash='dash', line_color='red', annotation_text=f'Cutoff ({thresh_slider:.2f})')
                 st.plotly_chart(fig, use_container_width=True)
 
     with st.expander('Hyperparameter Cross-Validation Candidates & Tuning Details'):
@@ -553,6 +664,62 @@ elif page == 'Learning Lab':
             'Random Forest decorrelates trees further by selecting random subsets of features at each split.'
         )
 
+    st.markdown('### 5. Theoretical Bias–Variance Decomposition & Generalization Gap Inspector')
+    st.markdown(r'''
+    For any supervised learner $\hat{f}(x)$, the expected test mean squared error decomposes into three mathematically distinct components:
+    $$\mathbb{E}\left[(y - \hat{f}(x))^2\right] = \underbrace{\text{Bias}[\hat{f}(x)]^2}_{\text{Error from under-simplification}} + \underbrace{\text{Var}[\hat{f}(x)]}_{\text{Sensitivity to training fluctuations}} + \underbrace{\sigma^2}_{\text{Irreducible noise}}$$
+    ''')
+
+    if not depths.empty:
+        part = depths[depths.scenario == scenario]
+        flat_gap = part.groupby('depth', sort=False)[['train_rmse', 'validation_rmse']].mean().reset_index()
+        flat_gap['gap'] = (flat_gap['validation_rmse'] - flat_gap['train_rmse']).abs()
+        flat_gap['regime'] = flat_gap.apply(
+            lambda row: '⚠️ Underfitting (High Bias)' if row['depth'] <= 2
+            else ('🎯 Optimal Generalization' if row['gap'] < 1.0 else '⚠️ Overfitting (High Variance)'),
+            axis=1
+        )
+
+        col_bv1, col_bv2 = st.columns([3, 2])
+        with col_bv1:
+            comp_x = np.linspace(1, 10, 50)
+            bias_sq = 4.0 / (comp_x ** 0.85)
+            variance = 0.06 * (comp_x ** 1.65)
+            irr_noise = np.full_like(comp_x, 1.2)
+            total_err = bias_sq + variance + irr_noise
+
+            theo_df = pd.DataFrame({
+                'Complexity': comp_x,
+                'Bias² (Underfitting)': bias_sq,
+                'Variance (Sensitivity)': variance,
+                'Total Expected Error': total_err
+            })
+
+            fig_bv = px.line(
+                theo_df, x='Complexity',
+                y=['Bias² (Underfitting)', 'Variance (Sensitivity)', 'Total Expected Error'],
+                labels={'value': 'Error Magnitude', 'Complexity': 'Model Complexity (Capacity / Depth)'},
+                title='Theoretical Bias-Variance Tradeoff (The U-Curve)'
+            )
+            min_idx = int(np.argmin(total_err))
+            opt_c = comp_x[min_idx]
+            fig_bv.add_vline(x=opt_c, line_dash='dash', line_color='green', annotation_text='Optimal Tradeoff')
+            st.plotly_chart(fig_bv, use_container_width=True)
+
+        with col_bv2:
+            st.markdown('#### Empirical Generalization Gap per Depth')
+            st.dataframe(
+                flat_gap[['depth', 'train_rmse', 'validation_rmse', 'gap', 'regime']].rename(
+                    columns={'depth': 'Depth', 'train_rmse': 'Train RMSE', 'validation_rmse': 'Val RMSE',
+                             'gap': 'Gap (Δ)', 'regime': 'Diagnostic State'}
+                ),
+                hide_index=True,
+                use_container_width=True
+            )
+            st.caption(
+                '**Generalization Gap rule of thumb:** When $\\Delta = |\\text{Val} - \\text{Train}| > 1.0$, the model begins memorizing training noise.'
+            )
+
 
 # -------------------------------------------------------------
 # PAGE 5: EXPLAINABILITY
@@ -587,6 +754,63 @@ elif page == 'Explainability':
             title='Comparison of Top Feature Importances'
         )
         st.plotly_chart(fig, use_container_width=True)
+
+    st.markdown('### Local Explainability: Individual Student Risk Factors')
+    st.caption('How specific student habits deviate from the school baseline and impact predictions.')
+
+    test_preds = read_csv('test_predictions.csv')
+    if not test_preds.empty:
+        tp_sub = test_preds[(test_preds.scenario == scenario) & (test_preds.task == 'risk') & (test_preds.model == selected_model)]
+        if not tp_sub.empty:
+            data_file = ROOT / 'data' / 'raw' / 'student-mat.csv'
+            if data_file.is_file():
+                raw_df = load_data(data_file)
+                cand_high = tp_sub[tp_sub.risk_probability > 0.65].head(3)
+                cand_low = tp_sub[tp_sub.risk_probability < 0.25].head(3)
+                cands = pd.concat([cand_high, cand_low])
+
+                if not cands.empty:
+                    choice_idx = st.selectbox(
+                        'Select Test Student Profile to Audit',
+                        cands.index,
+                        format_func=lambda i: f"Student #{i} · Risk: {tp_sub.loc[i, 'risk_probability']:.1%} · Actual: {'At Risk' if tp_sub.loc[i, 'actual'] == 1 else 'Passed'}"
+                    )
+                    sel_row = raw_df.iloc[choice_idx]
+
+                    col_ex1, col_ex2 = st.columns(2)
+                    with col_ex1:
+                        st.markdown('**Key Behavioral Indicators vs School Median:**')
+                        audit_data = [
+                            {'Feature': 'Absences', 'Student Value': f"{sel_row['absences']} days", 'School Median': f"{raw_df['absences'].median():.0f} days", 'Impact': '🔴 Elevated Risk' if sel_row['absences'] > raw_df['absences'].median() else '🟢 Protective'},
+                            {'Feature': 'Weekly Study Time', 'Student Value': {1: '<2 hrs', 2: '2-5 hrs', 3: '5-10 hrs', 4: '>10 hrs'}.get(sel_row['studytime'], str(sel_row['studytime'])), 'School Median': '2-5 hrs', 'Impact': '🔴 Low' if sel_row['studytime'] <= 1 else '🟢 Sufficient'},
+                            {'Feature': 'Past Failures', 'Student Value': f"{sel_row['failures']}", 'School Median': '0', 'Impact': '🔴 Critical Risk' if sel_row['failures'] > 0 else '🟢 Safe'},
+                            {'Feature': 'Higher Education Ambition', 'Student Value': f"{sel_row['higher']}", 'School Median': 'yes', 'Impact': '🟢 Motivated' if sel_row['higher'] == 'yes' else '🔴 Low Motivation'},
+                        ]
+                        if scenario == 'grade_informed':
+                            audit_data.extend([
+                                {'Feature': 'Period 1 Grade (G1)', 'Student Value': f"{sel_row['G1']} / 20", 'School Median': f"{raw_df['G1'].median():.0f} / 20", 'Impact': '🔴 Failing' if sel_row['G1'] < 10 else '🟢 Passing'},
+                                {'Feature': 'Period 2 Grade (G2)', 'Student Value': f"{sel_row['G2']} / 20", 'School Median': f"{raw_df['G2'].median():.0f} / 20", 'Impact': '🔴 Failing' if sel_row['G2'] < 10 else '🟢 Passing'},
+                            ])
+                        st.dataframe(pd.DataFrame(audit_data), hide_index=True, use_container_width=True)
+
+                    with col_ex2:
+                        dev_features = ['absences', 'studytime', 'failures', 'goout', 'health']
+                        if scenario == 'grade_informed':
+                            dev_features.extend(['G1', 'G2'])
+
+                        student_vals = [float(sel_row[feat]) for feat in dev_features]
+                        median_vals = [float(raw_df[feat].median()) for feat in dev_features]
+
+                        dev_chart = pd.DataFrame({
+                            'Feature': dev_features * 2,
+                            'Value': student_vals + median_vals,
+                            'Category': ['This Student'] * len(dev_features) + ['School Median'] * len(dev_features)
+                        })
+                        fig_dev = px.bar(
+                            dev_chart, x='Feature', y='Value', color='Category', barmode='group',
+                            title='Feature Divergence (Student vs Population)'
+                        )
+                        st.plotly_chart(fig_dev, use_container_width=True)
 
     st.warning(
         '**Critical Ethical Notice:** Feature importance indicates mathematical contribution to loss reduction during model training. '
