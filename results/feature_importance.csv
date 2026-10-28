@@ -1,0 +1,559 @@
+scenario,task,model,feature,importance
+early,grade,Decision Tree,failures,0.48572634
+early,grade,Decision Tree,absences,0.41993808
+early,grade,Decision Tree,Medu,0.09433559
+early,grade,Decision Tree,school,0.0
+early,grade,Decision Tree,sex,0.0
+early,grade,Decision Tree,age,0.0
+early,grade,Decision Tree,address,0.0
+early,grade,Decision Tree,famsize,0.0
+early,grade,Decision Tree,Pstatus,0.0
+early,grade,Decision Tree,Fedu,0.0
+early,grade,Decision Tree,Mjob,0.0
+early,grade,Decision Tree,Fjob,0.0
+early,grade,Decision Tree,reason,0.0
+early,grade,Decision Tree,guardian,0.0
+early,grade,Decision Tree,traveltime,0.0
+early,grade,Decision Tree,studytime,0.0
+early,grade,Decision Tree,schoolsup,0.0
+early,grade,Decision Tree,famsup,0.0
+early,grade,Decision Tree,paid,0.0
+early,grade,Decision Tree,activities,0.0
+early,grade,Decision Tree,nursery,0.0
+early,grade,Decision Tree,higher,0.0
+early,grade,Decision Tree,internet,0.0
+early,grade,Decision Tree,romantic,0.0
+early,grade,Decision Tree,famrel,0.0
+early,grade,Decision Tree,freetime,0.0
+early,grade,Decision Tree,goout,0.0
+early,grade,Decision Tree,Dalc,0.0
+early,grade,Decision Tree,Walc,0.0
+early,grade,Decision Tree,health,0.0
+early,grade,Bagging,absences,0.21292191
+early,grade,Bagging,failures,0.16804773
+early,grade,Bagging,Mjob,0.04788394
+early,grade,Bagging,age,0.04488645
+early,grade,Bagging,goout,0.04453058
+early,grade,Bagging,Medu,0.03874704
+early,grade,Bagging,reason,0.03033335
+early,grade,Bagging,Fjob,0.03032
+early,grade,Bagging,freetime,0.03029416
+early,grade,Bagging,schoolsup,0.02960066
+early,grade,Bagging,guardian,0.02937103
+early,grade,Bagging,famrel,0.02924079
+early,grade,Bagging,health,0.02395838
+early,grade,Bagging,sex,0.02264667
+early,grade,Bagging,traveltime,0.02213776
+early,grade,Bagging,Walc,0.02194167
+early,grade,Bagging,Fedu,0.01837554
+early,grade,Bagging,studytime,0.01822225
+early,grade,Bagging,higher,0.01614853
+early,grade,Bagging,romantic,0.01542001
+early,grade,Bagging,famsup,0.01528272
+early,grade,Bagging,school,0.01387111
+early,grade,Bagging,paid,0.0131839
+early,grade,Bagging,Dalc,0.01164194
+early,grade,Bagging,activities,0.011085
+early,grade,Bagging,address,0.01039954
+early,grade,Bagging,famsize,0.00968762
+early,grade,Bagging,Pstatus,0.00934345
+early,grade,Bagging,internet,0.00782565
+early,grade,Bagging,nursery,0.00265062
+early,grade,Random Forest,absences,0.19740516
+early,grade,Random Forest,failures,0.15475343
+early,grade,Random Forest,Mjob,0.05007634
+early,grade,Random Forest,age,0.04763015
+early,grade,Random Forest,goout,0.04533265
+early,grade,Random Forest,Medu,0.04252844
+early,grade,Random Forest,famrel,0.03209743
+early,grade,Random Forest,freetime,0.03116038
+early,grade,Random Forest,schoolsup,0.02971955
+early,grade,Random Forest,guardian,0.02926131
+early,grade,Random Forest,reason,0.02874432
+early,grade,Random Forest,Fjob,0.02869225
+early,grade,Random Forest,health,0.02782426
+early,grade,Random Forest,traveltime,0.02402479
+early,grade,Random Forest,Fedu,0.02272176
+early,grade,Random Forest,studytime,0.02225868
+early,grade,Random Forest,Walc,0.02199276
+early,grade,Random Forest,sex,0.02108713
+early,grade,Random Forest,famsup,0.01677761
+early,grade,Random Forest,romantic,0.01558259
+early,grade,Random Forest,higher,0.0151387
+early,grade,Random Forest,school,0.01427004
+early,grade,Random Forest,activities,0.01402401
+early,grade,Random Forest,paid,0.01348108
+early,grade,Random Forest,famsize,0.01186317
+early,grade,Random Forest,address,0.01110909
+early,grade,Random Forest,Dalc,0.01104312
+early,grade,Random Forest,Pstatus,0.00776933
+early,grade,Random Forest,internet,0.00732598
+early,grade,Random Forest,nursery,0.00430449
+early,grade,XGBoost,schoolsup,0.08842916
+early,grade,XGBoost,failures,0.08393366
+early,grade,XGBoost,Mjob,0.07776854
+early,grade,XGBoost,Medu,0.05295257
+early,grade,XGBoost,Fjob,0.05185832
+early,grade,XGBoost,guardian,0.04855093
+early,grade,XGBoost,absences,0.04655424
+early,grade,XGBoost,Pstatus,0.04540598
+early,grade,XGBoost,famsize,0.04490718
+early,grade,XGBoost,Walc,0.0392889
+early,grade,XGBoost,age,0.0384203
+early,grade,XGBoost,Dalc,0.03700028
+early,grade,XGBoost,sex,0.03686958
+early,grade,XGBoost,freetime,0.02883053
+early,grade,XGBoost,reason,0.02701914
+early,grade,XGBoost,famsup,0.02588729
+early,grade,XGBoost,romantic,0.02578316
+early,grade,XGBoost,famrel,0.02356673
+early,grade,XGBoost,goout,0.02353993
+early,grade,XGBoost,studytime,0.02312751
+early,grade,XGBoost,health,0.02228684
+early,grade,XGBoost,Fedu,0.02225133
+early,grade,XGBoost,traveltime,0.01889092
+early,grade,XGBoost,internet,0.01816019
+early,grade,XGBoost,paid,0.01733748
+early,grade,XGBoost,activities,0.01688856
+early,grade,XGBoost,nursery,0.01449069
+early,grade,XGBoost,school,0.0
+early,grade,XGBoost,address,0.0
+early,grade,XGBoost,higher,0.0
+early,grade,LightGBM,absences,96.0
+early,grade,LightGBM,failures,43.0
+early,grade,LightGBM,Mjob,31.0
+early,grade,LightGBM,famsup,25.0
+early,grade,LightGBM,age,23.0
+early,grade,LightGBM,Medu,22.0
+early,grade,LightGBM,traveltime,22.0
+early,grade,LightGBM,goout,22.0
+early,grade,LightGBM,freetime,20.0
+early,grade,LightGBM,famsize,19.0
+early,grade,LightGBM,sex,18.0
+early,grade,LightGBM,Fedu,17.0
+early,grade,LightGBM,reason,17.0
+early,grade,LightGBM,Dalc,15.0
+early,grade,LightGBM,schoolsup,14.0
+early,grade,LightGBM,Walc,11.0
+early,grade,LightGBM,guardian,10.0
+early,grade,LightGBM,paid,10.0
+early,grade,LightGBM,health,10.0
+early,grade,LightGBM,famrel,9.0
+early,grade,LightGBM,studytime,8.0
+early,grade,LightGBM,romantic,8.0
+early,grade,LightGBM,activities,7.0
+early,grade,LightGBM,Pstatus,4.0
+early,grade,LightGBM,address,3.0
+early,grade,LightGBM,nursery,3.0
+early,grade,LightGBM,Fjob,2.0
+early,grade,LightGBM,school,0.0
+early,grade,LightGBM,higher,0.0
+early,grade,LightGBM,internet,0.0
+early,risk,Decision Tree,failures,0.33177468
+early,risk,Decision Tree,absences,0.22352477
+early,risk,Decision Tree,Mjob,0.08114673
+early,risk,Decision Tree,studytime,0.07048043
+early,risk,Decision Tree,Fedu,0.06438903
+early,risk,Decision Tree,guardian,0.052776
+early,risk,Decision Tree,schoolsup,0.0471646
+early,risk,Decision Tree,paid,0.04285412
+early,risk,Decision Tree,freetime,0.02333169
+early,risk,Decision Tree,health,0.02321832
+early,risk,Decision Tree,Fjob,0.01904628
+early,risk,Decision Tree,reason,0.01031673
+early,risk,Decision Tree,goout,0.00997662
+early,risk,Decision Tree,school,0.0
+early,risk,Decision Tree,sex,0.0
+early,risk,Decision Tree,age,0.0
+early,risk,Decision Tree,address,0.0
+early,risk,Decision Tree,famsize,0.0
+early,risk,Decision Tree,Pstatus,0.0
+early,risk,Decision Tree,Medu,0.0
+early,risk,Decision Tree,traveltime,0.0
+early,risk,Decision Tree,famsup,0.0
+early,risk,Decision Tree,activities,0.0
+early,risk,Decision Tree,nursery,0.0
+early,risk,Decision Tree,higher,0.0
+early,risk,Decision Tree,internet,0.0
+early,risk,Decision Tree,romantic,0.0
+early,risk,Decision Tree,famrel,0.0
+early,risk,Decision Tree,Dalc,0.0
+early,risk,Decision Tree,Walc,0.0
+early,risk,Random Forest,failures,0.09305312
+early,risk,Random Forest,absences,0.09193305
+early,risk,Random Forest,Mjob,0.05896133
+early,risk,Random Forest,goout,0.05157539
+early,risk,Random Forest,age,0.05014607
+early,risk,Random Forest,reason,0.04262559
+early,risk,Random Forest,Fjob,0.03771077
+early,risk,Random Forest,famrel,0.03709147
+early,risk,Random Forest,Fedu,0.03460354
+early,risk,Random Forest,health,0.03411495
+early,risk,Random Forest,schoolsup,0.03274983
+early,risk,Random Forest,Walc,0.03116902
+early,risk,Random Forest,freetime,0.0304407
+early,risk,Random Forest,Medu,0.03021275
+early,risk,Random Forest,guardian,0.03011527
+early,risk,Random Forest,sex,0.02678497
+early,risk,Random Forest,Dalc,0.02629685
+early,risk,Random Forest,romantic,0.02607588
+early,risk,Random Forest,activities,0.02500232
+early,risk,Random Forest,paid,0.02484004
+early,risk,Random Forest,famsup,0.02463949
+early,risk,Random Forest,studytime,0.02387973
+early,risk,Random Forest,internet,0.02168701
+early,risk,Random Forest,nursery,0.02148099
+early,risk,Random Forest,address,0.02046733
+early,risk,Random Forest,famsize,0.01900586
+early,risk,Random Forest,higher,0.01756293
+early,risk,Random Forest,traveltime,0.01669663
+early,risk,Random Forest,school,0.0112629
+early,risk,Random Forest,Pstatus,0.0078142
+early,risk,XGBoost,Mjob,0.08953164
+early,risk,XGBoost,Fjob,0.06907589
+early,risk,XGBoost,schoolsup,0.06849856
+early,risk,XGBoost,reason,0.05844908
+early,risk,XGBoost,sex,0.05720889
+early,risk,XGBoost,guardian,0.05627035
+early,risk,XGBoost,failures,0.04993195
+early,risk,XGBoost,Pstatus,0.03996195
+early,risk,XGBoost,romantic,0.03904134
+early,risk,XGBoost,activities,0.03824296
+early,risk,XGBoost,address,0.03707061
+early,risk,XGBoost,famsize,0.03330485
+early,risk,XGBoost,school,0.03235167
+early,risk,XGBoost,famsup,0.03156352
+early,risk,XGBoost,higher,0.02757982
+early,risk,XGBoost,nursery,0.02626703
+early,risk,XGBoost,paid,0.02551378
+early,risk,XGBoost,absences,0.02024801
+early,risk,XGBoost,goout,0.02011698
+early,risk,XGBoost,famrel,0.01998626
+early,risk,XGBoost,studytime,0.01837817
+early,risk,XGBoost,Dalc,0.01750143
+early,risk,XGBoost,age,0.01696973
+early,risk,XGBoost,internet,0.0163813
+early,risk,XGBoost,Fedu,0.01610272
+early,risk,XGBoost,Walc,0.01538722
+early,risk,XGBoost,freetime,0.01513026
+early,risk,XGBoost,Medu,0.01499208
+early,risk,XGBoost,health,0.01475204
+early,risk,XGBoost,traveltime,0.01418991
+early,risk,LightGBM,absences,160.0
+early,risk,LightGBM,failures,89.0
+early,risk,LightGBM,Mjob,72.0
+early,risk,LightGBM,goout,64.0
+early,risk,LightGBM,Fedu,60.0
+early,risk,LightGBM,Walc,58.0
+early,risk,LightGBM,reason,48.0
+early,risk,LightGBM,Fjob,46.0
+early,risk,LightGBM,famrel,44.0
+early,risk,LightGBM,health,44.0
+early,risk,LightGBM,famsup,43.0
+early,risk,LightGBM,age,42.0
+early,risk,LightGBM,schoolsup,40.0
+early,risk,LightGBM,freetime,39.0
+early,risk,LightGBM,address,33.0
+early,risk,LightGBM,Medu,33.0
+early,risk,LightGBM,guardian,29.0
+early,risk,LightGBM,romantic,25.0
+early,risk,LightGBM,Pstatus,23.0
+early,risk,LightGBM,studytime,20.0
+early,risk,LightGBM,sex,16.0
+early,risk,LightGBM,famsize,14.0
+early,risk,LightGBM,activities,14.0
+early,risk,LightGBM,traveltime,13.0
+early,risk,LightGBM,Dalc,12.0
+early,risk,LightGBM,paid,11.0
+early,risk,LightGBM,nursery,7.0
+early,risk,LightGBM,internet,5.0
+early,risk,LightGBM,higher,1.0
+early,risk,LightGBM,school,0.0
+grade_informed,grade,Decision Tree,G2,0.86244271
+grade_informed,grade,Decision Tree,absences,0.08008835
+grade_informed,grade,Decision Tree,age,0.0280239
+grade_informed,grade,Decision Tree,reason,0.02458263
+grade_informed,grade,Decision Tree,traveltime,0.00212704
+grade_informed,grade,Decision Tree,health,0.00165277
+grade_informed,grade,Decision Tree,Walc,0.00108259
+grade_informed,grade,Decision Tree,school,0.0
+grade_informed,grade,Decision Tree,sex,0.0
+grade_informed,grade,Decision Tree,address,0.0
+grade_informed,grade,Decision Tree,famsize,0.0
+grade_informed,grade,Decision Tree,Pstatus,0.0
+grade_informed,grade,Decision Tree,Medu,0.0
+grade_informed,grade,Decision Tree,Fedu,0.0
+grade_informed,grade,Decision Tree,Mjob,0.0
+grade_informed,grade,Decision Tree,Fjob,0.0
+grade_informed,grade,Decision Tree,guardian,0.0
+grade_informed,grade,Decision Tree,studytime,0.0
+grade_informed,grade,Decision Tree,failures,0.0
+grade_informed,grade,Decision Tree,schoolsup,0.0
+grade_informed,grade,Decision Tree,famsup,0.0
+grade_informed,grade,Decision Tree,paid,0.0
+grade_informed,grade,Decision Tree,activities,0.0
+grade_informed,grade,Decision Tree,nursery,0.0
+grade_informed,grade,Decision Tree,higher,0.0
+grade_informed,grade,Decision Tree,internet,0.0
+grade_informed,grade,Decision Tree,romantic,0.0
+grade_informed,grade,Decision Tree,famrel,0.0
+grade_informed,grade,Decision Tree,freetime,0.0
+grade_informed,grade,Decision Tree,goout,0.0
+grade_informed,grade,Decision Tree,Dalc,0.0
+grade_informed,grade,Decision Tree,G1,0.0
+grade_informed,grade,Bagging,G2,0.79298729
+grade_informed,grade,Bagging,absences,0.10154112
+grade_informed,grade,Bagging,age,0.01732377
+grade_informed,grade,Bagging,guardian,0.0091088
+grade_informed,grade,Bagging,G1,0.0089202
+grade_informed,grade,Bagging,famrel,0.00844396
+grade_informed,grade,Bagging,reason,0.00837248
+grade_informed,grade,Bagging,health,0.00584538
+grade_informed,grade,Bagging,studytime,0.00488627
+grade_informed,grade,Bagging,Fjob,0.00326437
+grade_informed,grade,Bagging,activities,0.00325743
+grade_informed,grade,Bagging,goout,0.00324528
+grade_informed,grade,Bagging,Dalc,0.00320497
+grade_informed,grade,Bagging,Mjob,0.00313517
+grade_informed,grade,Bagging,Fedu,0.00289312
+grade_informed,grade,Bagging,freetime,0.0027467
+grade_informed,grade,Bagging,Medu,0.00246805
+grade_informed,grade,Bagging,Walc,0.00233905
+grade_informed,grade,Bagging,romantic,0.00199325
+grade_informed,grade,Bagging,famsup,0.00189041
+grade_informed,grade,Bagging,paid,0.00187401
+grade_informed,grade,Bagging,schoolsup,0.00185022
+grade_informed,grade,Bagging,failures,0.00159415
+grade_informed,grade,Bagging,school,0.00137302
+grade_informed,grade,Bagging,nursery,0.0012783
+grade_informed,grade,Bagging,traveltime,0.00118607
+grade_informed,grade,Bagging,famsize,0.00102379
+grade_informed,grade,Bagging,internet,0.00055574
+grade_informed,grade,Bagging,higher,0.00039324
+grade_informed,grade,Bagging,sex,0.00038165
+grade_informed,grade,Bagging,Pstatus,0.00033797
+grade_informed,grade,Bagging,address,0.00028476
+grade_informed,grade,Random Forest,G2,0.79139563
+grade_informed,grade,Random Forest,absences,0.10138085
+grade_informed,grade,Random Forest,age,0.01736062
+grade_informed,grade,Random Forest,famrel,0.00938245
+grade_informed,grade,Random Forest,guardian,0.00872046
+grade_informed,grade,Random Forest,G1,0.0081899
+grade_informed,grade,Random Forest,reason,0.00811771
+grade_informed,grade,Random Forest,health,0.00745928
+grade_informed,grade,Random Forest,studytime,0.00486531
+grade_informed,grade,Random Forest,Fjob,0.00361418
+grade_informed,grade,Random Forest,Mjob,0.00345213
+grade_informed,grade,Random Forest,activities,0.00343312
+grade_informed,grade,Random Forest,freetime,0.00307369
+grade_informed,grade,Random Forest,Medu,0.00303531
+grade_informed,grade,Random Forest,goout,0.0030076
+grade_informed,grade,Random Forest,Fedu,0.00283442
+grade_informed,grade,Random Forest,Dalc,0.00273669
+grade_informed,grade,Random Forest,romantic,0.00230678
+grade_informed,grade,Random Forest,schoolsup,0.00191731
+grade_informed,grade,Random Forest,Walc,0.00188734
+grade_informed,grade,Random Forest,nursery,0.00188408
+grade_informed,grade,Random Forest,paid,0.00176729
+grade_informed,grade,Random Forest,famsup,0.00167895
+grade_informed,grade,Random Forest,failures,0.00138449
+grade_informed,grade,Random Forest,traveltime,0.00112732
+grade_informed,grade,Random Forest,famsize,0.00109824
+grade_informed,grade,Random Forest,school,0.00097124
+grade_informed,grade,Random Forest,sex,0.00082362
+grade_informed,grade,Random Forest,Pstatus,0.00031641
+grade_informed,grade,Random Forest,address,0.00028908
+grade_informed,grade,Random Forest,internet,0.00025082
+grade_informed,grade,Random Forest,higher,0.00023768
+grade_informed,grade,XGBoost,G2,0.49794492
+grade_informed,grade,XGBoost,absences,0.12130769
+grade_informed,grade,XGBoost,G1,0.0727137
+grade_informed,grade,XGBoost,guardian,0.04819658
+grade_informed,grade,XGBoost,activities,0.03727588
+grade_informed,grade,XGBoost,age,0.03144848
+grade_informed,grade,XGBoost,Fjob,0.03099663
+grade_informed,grade,XGBoost,romantic,0.02234055
+grade_informed,grade,XGBoost,famrel,0.02138452
+grade_informed,grade,XGBoost,Fedu,0.01735013
+grade_informed,grade,XGBoost,Walc,0.01734484
+grade_informed,grade,XGBoost,famsize,0.01706055
+grade_informed,grade,XGBoost,health,0.01694392
+grade_informed,grade,XGBoost,reason,0.01358121
+grade_informed,grade,XGBoost,goout,0.01215104
+grade_informed,grade,XGBoost,traveltime,0.01127686
+grade_informed,grade,XGBoost,paid,0.01065895
+grade_informed,grade,XGBoost,Medu,2.359e-05
+grade_informed,grade,XGBoost,school,0.0
+grade_informed,grade,XGBoost,sex,0.0
+grade_informed,grade,XGBoost,address,0.0
+grade_informed,grade,XGBoost,Pstatus,0.0
+grade_informed,grade,XGBoost,Mjob,0.0
+grade_informed,grade,XGBoost,studytime,0.0
+grade_informed,grade,XGBoost,failures,0.0
+grade_informed,grade,XGBoost,schoolsup,0.0
+grade_informed,grade,XGBoost,famsup,0.0
+grade_informed,grade,XGBoost,nursery,0.0
+grade_informed,grade,XGBoost,higher,0.0
+grade_informed,grade,XGBoost,internet,0.0
+grade_informed,grade,XGBoost,freetime,0.0
+grade_informed,grade,XGBoost,Dalc,0.0
+grade_informed,grade,LightGBM,G2,293.0
+grade_informed,grade,LightGBM,absences,134.0
+grade_informed,grade,LightGBM,G1,105.0
+grade_informed,grade,LightGBM,age,72.0
+grade_informed,grade,LightGBM,famrel,63.0
+grade_informed,grade,LightGBM,reason,50.0
+grade_informed,grade,LightGBM,health,48.0
+grade_informed,grade,LightGBM,Walc,44.0
+grade_informed,grade,LightGBM,freetime,39.0
+grade_informed,grade,LightGBM,goout,33.0
+grade_informed,grade,LightGBM,activities,30.0
+grade_informed,grade,LightGBM,Fedu,27.0
+grade_informed,grade,LightGBM,guardian,27.0
+grade_informed,grade,LightGBM,studytime,25.0
+grade_informed,grade,LightGBM,Medu,24.0
+grade_informed,grade,LightGBM,Mjob,21.0
+grade_informed,grade,LightGBM,famsize,20.0
+grade_informed,grade,LightGBM,Fjob,19.0
+grade_informed,grade,LightGBM,traveltime,18.0
+grade_informed,grade,LightGBM,paid,16.0
+grade_informed,grade,LightGBM,school,15.0
+grade_informed,grade,LightGBM,Dalc,13.0
+grade_informed,grade,LightGBM,famsup,10.0
+grade_informed,grade,LightGBM,romantic,9.0
+grade_informed,grade,LightGBM,schoolsup,7.0
+grade_informed,grade,LightGBM,sex,6.0
+grade_informed,grade,LightGBM,failures,6.0
+grade_informed,grade,LightGBM,Pstatus,3.0
+grade_informed,grade,LightGBM,address,1.0
+grade_informed,grade,LightGBM,internet,1.0
+grade_informed,grade,LightGBM,nursery,0.0
+grade_informed,grade,LightGBM,higher,0.0
+grade_informed,risk,Decision Tree,G2,1.0
+grade_informed,risk,Decision Tree,school,0.0
+grade_informed,risk,Decision Tree,sex,0.0
+grade_informed,risk,Decision Tree,age,0.0
+grade_informed,risk,Decision Tree,address,0.0
+grade_informed,risk,Decision Tree,famsize,0.0
+grade_informed,risk,Decision Tree,Pstatus,0.0
+grade_informed,risk,Decision Tree,Medu,0.0
+grade_informed,risk,Decision Tree,Fedu,0.0
+grade_informed,risk,Decision Tree,Mjob,0.0
+grade_informed,risk,Decision Tree,Fjob,0.0
+grade_informed,risk,Decision Tree,reason,0.0
+grade_informed,risk,Decision Tree,guardian,0.0
+grade_informed,risk,Decision Tree,traveltime,0.0
+grade_informed,risk,Decision Tree,studytime,0.0
+grade_informed,risk,Decision Tree,failures,0.0
+grade_informed,risk,Decision Tree,schoolsup,0.0
+grade_informed,risk,Decision Tree,famsup,0.0
+grade_informed,risk,Decision Tree,paid,0.0
+grade_informed,risk,Decision Tree,activities,0.0
+grade_informed,risk,Decision Tree,nursery,0.0
+grade_informed,risk,Decision Tree,higher,0.0
+grade_informed,risk,Decision Tree,internet,0.0
+grade_informed,risk,Decision Tree,romantic,0.0
+grade_informed,risk,Decision Tree,famrel,0.0
+grade_informed,risk,Decision Tree,freetime,0.0
+grade_informed,risk,Decision Tree,goout,0.0
+grade_informed,risk,Decision Tree,Dalc,0.0
+grade_informed,risk,Decision Tree,Walc,0.0
+grade_informed,risk,Decision Tree,health,0.0
+grade_informed,risk,Decision Tree,absences,0.0
+grade_informed,risk,Decision Tree,G1,0.0
+grade_informed,risk,Random Forest,G2,0.36529498
+grade_informed,risk,Random Forest,G1,0.2460551
+grade_informed,risk,Random Forest,absences,0.03351088
+grade_informed,risk,Random Forest,failures,0.02958738
+grade_informed,risk,Random Forest,goout,0.02238417
+grade_informed,risk,Random Forest,Mjob,0.01899326
+grade_informed,risk,Random Forest,age,0.0181277
+grade_informed,risk,Random Forest,reason,0.017493
+grade_informed,risk,Random Forest,Walc,0.01651935
+grade_informed,risk,Random Forest,schoolsup,0.0164192
+grade_informed,risk,Random Forest,Fedu,0.01420066
+grade_informed,risk,Random Forest,Fjob,0.01360656
+grade_informed,risk,Random Forest,health,0.01335936
+grade_informed,risk,Random Forest,famrel,0.0132077
+grade_informed,risk,Random Forest,activities,0.0131602
+grade_informed,risk,Random Forest,guardian,0.01307763
+grade_informed,risk,Random Forest,sex,0.01256185
+grade_informed,risk,Random Forest,romantic,0.01213306
+grade_informed,risk,Random Forest,Dalc,0.0115311
+grade_informed,risk,Random Forest,Medu,0.01122439
+grade_informed,risk,Random Forest,famsup,0.00997567
+grade_informed,risk,Random Forest,famsize,0.00993591
+grade_informed,risk,Random Forest,higher,0.00971529
+grade_informed,risk,Random Forest,paid,0.00932819
+grade_informed,risk,Random Forest,address,0.00843979
+grade_informed,risk,Random Forest,freetime,0.00803427
+grade_informed,risk,Random Forest,internet,0.00705959
+grade_informed,risk,Random Forest,studytime,0.00705372
+grade_informed,risk,Random Forest,traveltime,0.00660547
+grade_informed,risk,Random Forest,nursery,0.00591957
+grade_informed,risk,Random Forest,school,0.00325891
+grade_informed,risk,Random Forest,Pstatus,0.00222608
+grade_informed,risk,XGBoost,G2,0.49091566
+grade_informed,risk,XGBoost,Fjob,0.07628024
+grade_informed,risk,XGBoost,reason,0.06340068
+grade_informed,risk,XGBoost,G1,0.04702581
+grade_informed,risk,XGBoost,activities,0.04276158
+grade_informed,risk,XGBoost,famrel,0.03949051
+grade_informed,risk,XGBoost,Fedu,0.03922645
+grade_informed,risk,XGBoost,romantic,0.03402483
+grade_informed,risk,XGBoost,Medu,0.02725815
+grade_informed,risk,XGBoost,age,0.02680092
+grade_informed,risk,XGBoost,absences,0.0259325
+grade_informed,risk,XGBoost,traveltime,0.02468715
+grade_informed,risk,XGBoost,schoolsup,0.02141791
+grade_informed,risk,XGBoost,failures,0.02088661
+grade_informed,risk,XGBoost,goout,0.01989103
+grade_informed,risk,XGBoost,school,0.0
+grade_informed,risk,XGBoost,sex,0.0
+grade_informed,risk,XGBoost,address,0.0
+grade_informed,risk,XGBoost,famsize,0.0
+grade_informed,risk,XGBoost,Pstatus,0.0
+grade_informed,risk,XGBoost,Mjob,0.0
+grade_informed,risk,XGBoost,guardian,0.0
+grade_informed,risk,XGBoost,studytime,0.0
+grade_informed,risk,XGBoost,famsup,0.0
+grade_informed,risk,XGBoost,paid,0.0
+grade_informed,risk,XGBoost,nursery,0.0
+grade_informed,risk,XGBoost,higher,0.0
+grade_informed,risk,XGBoost,internet,0.0
+grade_informed,risk,XGBoost,freetime,0.0
+grade_informed,risk,XGBoost,Dalc,0.0
+grade_informed,risk,XGBoost,Walc,0.0
+grade_informed,risk,XGBoost,health,0.0
+grade_informed,risk,LightGBM,G2,135.0
+grade_informed,risk,LightGBM,G1,46.0
+grade_informed,risk,LightGBM,famrel,29.0
+grade_informed,risk,LightGBM,Fjob,24.0
+grade_informed,risk,LightGBM,goout,22.0
+grade_informed,risk,LightGBM,Fedu,18.0
+grade_informed,risk,LightGBM,activities,18.0
+grade_informed,risk,LightGBM,age,14.0
+grade_informed,risk,LightGBM,reason,8.0
+grade_informed,risk,LightGBM,studytime,5.0
+grade_informed,risk,LightGBM,schoolsup,5.0
+grade_informed,risk,LightGBM,absences,2.0
+grade_informed,risk,LightGBM,Medu,1.0
+grade_informed,risk,LightGBM,internet,1.0
+grade_informed,risk,LightGBM,freetime,1.0
+grade_informed,risk,LightGBM,school,0.0
+grade_informed,risk,LightGBM,sex,0.0
+grade_informed,risk,LightGBM,address,0.0
+grade_informed,risk,LightGBM,famsize,0.0
+grade_informed,risk,LightGBM,Pstatus,0.0
+grade_informed,risk,LightGBM,Mjob,0.0
+grade_informed,risk,LightGBM,guardian,0.0
+grade_informed,risk,LightGBM,traveltime,0.0
+grade_informed,risk,LightGBM,failures,0.0
+grade_informed,risk,LightGBM,famsup,0.0
+grade_informed,risk,LightGBM,paid,0.0
+grade_informed,risk,LightGBM,nursery,0.0
+grade_informed,risk,LightGBM,higher,0.0
+grade_informed,risk,LightGBM,romantic,0.0
+grade_informed,risk,LightGBM,Dalc,0.0
+grade_informed,risk,LightGBM,Walc,0.0
+grade_informed,risk,LightGBM,health,0.0

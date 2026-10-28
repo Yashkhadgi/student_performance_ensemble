@@ -1,0 +1,49 @@
+scenario,repeat,regularization,train_rmse,validation_rmse
+early,0,Unrestricted Baseline,0.0,5.726907398800017
+early,0,Constrained Depth (depth=4),3.558416231267043,4.722168204278389
+early,0,Min Leaf Size (leaf=8),3.1661373327056093,4.3952578616209745
+early,0,Min Sample Split (split=12),2.37649813960658,5.179134010556477
+early,0,Cost-Complexity Pruned (α=0.08),1.5137468271211438,5.217504308516298
+early,0,Cost-Complexity Pruned (α=0.25),2.4358151583351457,5.020198223539594
+early,1,Unrestricted Baseline,0.0,5.9021557958067055
+early,1,Constrained Depth (depth=4),3.4118382081732594,4.68477082984295
+early,1,Min Leaf Size (leaf=8),3.101590829095852,5.180073135841833
+early,1,Min Sample Split (split=12),2.51322580312762,5.071438362425753
+early,1,Cost-Complexity Pruned (α=0.08),1.4314534179170773,5.5781650732901165
+early,1,Cost-Complexity Pruned (α=0.25),2.5684759494381226,5.2745290184865254
+early,2,Unrestricted Baseline,0.0,5.571173546349486
+early,2,Constrained Depth (depth=4),3.5332994918594007,4.804469560550723
+early,2,Min Leaf Size (leaf=8),3.1250976689701284,5.16635936383851
+early,2,Min Sample Split (split=12),2.3625552235236387,5.246976355502885
+early,2,Cost-Complexity Pruned (α=0.08),1.4202079770242653,5.188034583354607
+early,2,Cost-Complexity Pruned (α=0.25),2.2629053749637817,5.050729462114967
+early,3,Unrestricted Baseline,0.0,6.520658505225692
+early,3,Constrained Depth (depth=4),3.0210154327687775,5.39581062892263
+early,3,Min Leaf Size (leaf=8),3.0792068182081302,5.19682138388876
+early,3,Min Sample Split (split=12),2.3998185587960132,5.850824523668074
+early,3,Cost-Complexity Pruned (α=0.08),1.5112996135780639,5.96836147290701
+early,3,Cost-Complexity Pruned (α=0.25),2.717886638003764,5.710327187214043
+grade_informed,0,Unrestricted Baseline,0.0,1.764631420618173
+grade_informed,0,Constrained Depth (depth=4),1.5054129024596223,2.070721199688986
+grade_informed,0,Min Leaf Size (leaf=8),1.4988435372191438,1.377256319839163
+grade_informed,0,Min Sample Split (split=12),1.1561662636167398,2.1375448099461445
+grade_informed,0,Cost-Complexity Pruned (α=0.08),0.8892489728003627,1.7797304216836143
+grade_informed,0,Cost-Complexity Pruned (α=0.25),1.344885368683097,2.3393880131359
+grade_informed,1,Unrestricted Baseline,0.0,2.767350329846452
+grade_informed,1,Constrained Depth (depth=4),1.2346518808691227,2.431525150931918
+grade_informed,1,Min Leaf Size (leaf=8),1.2597785014840372,2.256690019062393
+grade_informed,1,Min Sample Split (split=12),0.7036464323535445,2.644454982425681
+grade_informed,1,Cost-Complexity Pruned (α=0.08),0.9507320311724591,2.6994182161396503
+grade_informed,1,Cost-Complexity Pruned (α=0.25),1.2054907693743744,2.549269893121663
+grade_informed,2,Unrestricted Baseline,0.0,2.1758164479546234
+grade_informed,2,Constrained Depth (depth=4),1.4857192342046683,1.5313863219109727
+grade_informed,2,Min Leaf Size (leaf=8),1.4568374402927111,1.5945200939284712
+grade_informed,2,Min Sample Split (split=12),1.2473584951395835,1.9010476167765382
+grade_informed,2,Cost-Complexity Pruned (α=0.08),0.912624614813457,2.0749029050344543
+grade_informed,2,Cost-Complexity Pruned (α=0.25),1.2142277520538032,2.1906004504373526
+grade_informed,3,Unrestricted Baseline,0.0,3.03565312139212
+grade_informed,3,Constrained Depth (depth=4),1.286071997386629,2.744924266242706
+grade_informed,3,Min Leaf Size (leaf=8),1.3523947658527002,2.6447966708381885
+grade_informed,3,Min Sample Split (split=12),1.0493103032204143,2.6212292594220905
+grade_informed,3,Cost-Complexity Pruned (α=0.08),0.9420462590795485,2.882387692695537
+grade_informed,3,Cost-Complexity Pruned (α=0.25),1.6191291325279813,2.817852521079505
