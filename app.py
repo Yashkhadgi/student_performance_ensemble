@@ -16,18 +16,18 @@ from src.data import ROOT, feature_frame, load_data
 from src.models import MODELS, make_preprocessor
 from src.neural_net import NumPyNeuralNetwork
 
-# Palette: Charcoal (#090907), Earth Brown (#6C5636), Burnt Amber (#B99D73)
-pio.templates['charcoal_amber'] = go.layout.Template(
+# Palette: Oxford Academic Navy (#162A45), Warm Paper (#F8F7F4), Slate Rule (#E2DFD8)
+pio.templates['oxford_editorial'] = go.layout.Template(
     layout=go.Layout(
-        paper_bgcolor='#090907',
-        plot_bgcolor='#12110E',
-        font=dict(color='#F5F2EB', family='Plus Jakarta Sans, sans-serif'),
-        colorway=['#B99D73', '#6C5636', '#DFCDB4', '#947854', '#53422A', '#D48560'],
-        xaxis=dict(gridcolor='#25211B', zerolinecolor='#3E372D', linecolor='#3E372D'),
-        yaxis=dict(gridcolor='#25211B', zerolinecolor='#3E372D', linecolor='#3E372D'),
+        paper_bgcolor='#FFFFFF',
+        plot_bgcolor='#FFFFFF',
+        font=dict(color='#181A1D', family='Plus Jakarta Sans, sans-serif'),
+        colorway=['#162A45', '#B93829', '#2D6A4F', '#64748B', '#D97706', '#475569'],
+        xaxis=dict(gridcolor='#ECEAE4', zerolinecolor='#D5D1C7', linecolor='#D5D1C7'),
+        yaxis=dict(gridcolor='#ECEAE4', zerolinecolor='#D5D1C7', linecolor='#D5D1C7'),
     )
 )
-pio.templates.default = 'charcoal_amber'
+pio.templates.default = 'oxford_editorial'
 
 st.set_page_config(
     page_title='Student Ensemble Lab · Academic Risk Analysis',
@@ -41,6 +41,7 @@ st.markdown('''<style>
 
 html, body, [class*="css"] {
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #181A1D;
 }
 
 .block-container {
@@ -49,63 +50,62 @@ html, body, [class*="css"] {
     max-width: 1440px;
 }
 
-/* Sidebar Styling */
+/* Sidebar Styling: Flat Slate/Off-white */
 [data-testid="stSidebar"] {
-    background: #0D0C0A;
-    border-right: 1px solid #28231C;
+    background: #F1EFEA;
+    border-right: 1px solid #E2DFD8;
 }
 [data-testid="stSidebar"] h2 {
-    color: #B99D73;
+    color: #162A45;
     font-weight: 700;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.02em;
 }
 
-/* Top Hero Banner */
+/* Top Hero Banner: Flat White slab with crisp Oxford Navy border-left */
 .hero {
-    padding: 26px 32px;
-    border-radius: 16px;
-    background: linear-gradient(135deg, #1A1713 0%, #11100D 50%, #201A13 100%);
-    border: 1px solid #6C5636;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(185, 157, 115, 0.25);
-    margin-bottom: 24px;
+    padding: 24px 28px;
+    border-radius: 8px;
+    background: #FFFFFF;
+    border: 1px solid #E2DFD8;
+    border-left: 5px solid #162A45;
+    margin-bottom: 22px;
 }
 .hero h1 {
-    color: #F5F2EB;
+    color: #162A45;
     margin: 0;
-    font-size: 2.2rem;
+    font-size: 2.1rem;
     font-weight: 700;
     letter-spacing: -0.02em;
 }
 .hero p {
-    color: #B99D73;
-    margin: 8px 0 0;
-    font-size: 1.05rem;
+    color: #5A606A;
+    margin: 6px 0 0;
+    font-size: 1.0rem;
     font-weight: 400;
 }
 
-/* Status Badges */
+/* Flat Status Badges */
 .status-pill-verified {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: #1C1711;
-    border: 1px solid #6C5636;
-    color: #DFCDB4;
+    background: #EAE6DF;
+    border: 1px solid #D5D1C7;
+    color: #162A45;
     padding: 6px 14px;
-    border-radius: 8px;
+    border-radius: 6px;
     font-size: 0.86rem;
     font-weight: 600;
-    letter-spacing: 0.02em;
 }
 .status-pill-synthetic {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: #201A14;
-    border: 1px solid #5C4A35;
-    color: #B99D73;
+    background: #FCE8E6;
+    border: 1px solid #F5C2BC;
+    color: #B93829;
     padding: 6px 14px;
-    border-radius: 8px;
+    border-radius: 6px;
     font-size: 0.86rem;
     font-weight: 600;
 }
@@ -113,124 +113,119 @@ html, body, [class*="css"] {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: #1C1711;
-    border: 1px solid #6C5636;
-    color: #B99D73;
+    background: #EAE6DF;
+    border: 1px solid #D5D1C7;
+    color: #162A45;
     padding: 6px 14px;
-    border-radius: 8px;
+    border-radius: 6px;
     font-size: 0.86rem;
     font-weight: 600;
 }
 
-/* Luxury Metric Cards */
+/* Flat Metric Cards */
 [data-testid="stMetric"] {
-    background: #141310;
-    border: 1px solid #332B20;
-    border-top: 3px solid #B99D73;
-    border-radius: 12px;
+    background: #FFFFFF;
+    border: 1px solid #E2DFD8;
+    border-top: 3px solid #162A45;
+    border-radius: 8px;
     padding: 16px 20px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    transition: transform 0.15s ease, border-color 0.15s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 [data-testid="stMetric"]:hover {
-    border-color: #6C5636;
-    border-top-color: #DFCDB4;
-    transform: translateY(-2px);
+    border-color: #CBD5E1;
 }
 [data-testid="stMetricLabel"] {
-    color: #B99D73 !important;
-    font-size: 0.88rem !important;
+    color: #5A606A !important;
+    font-size: 0.85rem !important;
     font-weight: 600 !important;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
 }
 [data-testid="stMetricValue"] {
-    color: #F5F2EB !important;
+    color: #162A45 !important;
     font-size: 1.85rem !important;
     font-weight: 700 !important;
 }
 
-/* Luxury Containers & Cards */
+/* Flat Cards & Panels */
 .card {
-    background: #141310;
-    border: 1px solid #332B20;
-    border-radius: 12px;
+    background: #FFFFFF;
+    border: 1px solid #E2DFD8;
+    border-radius: 8px;
     padding: 20px;
     margin-bottom: 16px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 /* Interactive Tabs */
 button[data-baseweb="tab"] {
-    color: #8C8476 !important;
+    color: #5A606A !important;
     font-weight: 500;
-    padding: 10px 20px !important;
-    border-radius: 8px 8px 0 0;
-    transition: color 0.15s ease;
+    padding: 10px 18px !important;
+    border-radius: 6px 6px 0 0;
 }
 button[data-baseweb="tab"][aria-selected="true"] {
-    color: #B99D73 !important;
-    border-bottom: 2px solid #B99D73 !important;
+    color: #162A45 !important;
+    border-bottom: 2px solid #162A45 !important;
     font-weight: 700;
 }
 
-/* Primary and Secondary Buttons */
+/* Flat Solid Buttons */
 .stButton > button {
-    background: #1C1813;
-    color: #F5F2EB;
-    border: 1px solid #6C5636;
-    border-radius: 10px;
-    padding: 10px 22px;
+    background: #FFFFFF;
+    color: #181A1D;
+    border: 1px solid #D5D1C7;
+    border-radius: 6px;
+    padding: 9px 20px;
     font-weight: 600;
-    letter-spacing: 0.02em;
-    transition: all 0.2s ease;
+    box-shadow: none;
+    transition: all 0.15s ease;
 }
 .stButton > button:hover {
-    background: #2A231A;
-    border-color: #B99D73;
-    color: #FFFFFF;
-    box-shadow: 0 4px 16px rgba(185, 157, 115, 0.2);
+    background: #F1EFEA;
+    border-color: #162A45;
+    color: #162A45;
 }
 .stButton > button[kind="primary"] {
-    background: linear-gradient(135deg, #B99D73 0%, #9E8158 100%);
-    color: #090907 !important;
-    border: none;
-    font-weight: 700;
-    box-shadow: 0 4px 14px rgba(185, 157, 115, 0.3);
+    background: #162A45;
+    color: #FFFFFF !important;
+    border: 1px solid #162A45;
+    font-weight: 600;
+    box-shadow: none;
 }
 .stButton > button[kind="primary"]:hover {
-    background: linear-gradient(135deg, #CBB490 0%, #B19468 100%);
-    box-shadow: 0 6px 20px rgba(185, 157, 115, 0.5);
-    transform: translateY(-1px);
+    background: #0E1B2E;
+    border-color: #0E1B2E;
 }
 
-/* Form & Input Containers */
+/* Form Containers */
 [data-testid="stForm"] {
-    background: #12110E;
-    border: 1px solid #332B20;
-    border-radius: 14px;
+    background: #FFFFFF;
+    border: 1px solid #E2DFD8;
+    border-radius: 8px;
     padding: 24px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 /* Dataframe styling */
 [data-testid="stDataFrame"] {
-    border: 1px solid #2B251D;
-    border-radius: 10px;
+    border: 1px solid #E2DFD8;
+    border-radius: 8px;
     overflow: hidden;
 }
 
-/* Progress Bar */
+/* Flat Progress Bar */
 .stProgress > div > div > div > div {
-    background: linear-gradient(90deg, #6C5636 0%, #B99D73 100%);
-    border-radius: 6px;
+    background: #162A45;
+    border-radius: 4px;
 }
 
 /* Alert Boxes */
 [data-testid="stAlert"] {
-    background: #161410;
-    border: 1px solid #6C5636;
-    border-radius: 10px;
-    color: #F5F2EB;
+    background: #F7F5F0;
+    border: 1px solid #E2DFD8;
+    border-radius: 8px;
+    color: #181A1D;
 }
 </style>''', unsafe_allow_html=True)
 
@@ -361,9 +356,9 @@ if page == 'Overview':
     )
 
     st.markdown('''
-    <div class="card" style="border-left: 4px solid #B99D73; margin-bottom: 20px;">
-        <div style="font-weight: 700; color: #F5F2EB; font-size: 1.05rem;">Production Academic Risk & Student Intelligence System</div>
-        <div style="font-size: 0.9rem; color: #B99D73; margin-top: 4px;">Trained and benchmarked on verified secondary education mathematics cohort (N=395). Full multi-scenario model evaluation across Bagging, Boosting, and Deep Learning architectures.</div>
+    <div class="card" style="border-left: 4px solid #162A45; margin-bottom: 20px;">
+        <div style="font-weight: 700; color: #162A45; font-size: 1.05rem;">Production Academic Risk & Student Intelligence System</div>
+        <div style="font-size: 0.9rem; color: #5A606A; margin-top: 4px;">Trained and benchmarked on verified secondary education mathematics cohort (N=395). Full multi-scenario model evaluation across Bagging, Boosting, and Deep Learning architectures.</div>
     </div>
     ''', unsafe_allow_html=True)
 
@@ -501,9 +496,9 @@ elif page == 'Predict Student':
 
         st.progress(min(1.0, max(0.0, prob)))
         st.markdown(f'''
-        <div class="card" style="border-left: 4px solid #B99D73; margin-top: 14px;">
-            <div style="font-size: 0.95rem; color: #F5F2EB; font-weight: 600;">Intervention Status · {risk_label}</div>
-            <div style="font-size: 0.88rem; color: #B99D73; margin-top: 4px;">Identified academic priority band based on ensemble probability ({100 * prob:.1f}%). Deploy suggested behavioral counterfactual interventions below.</div>
+        <div class="card" style="border-left: 4px solid #162A45; margin-top: 14px;">
+            <div style="font-size: 0.95rem; color: #162A45; font-weight: 600;">Intervention Status · {risk_label}</div>
+            <div style="font-size: 0.88rem; color: #5A606A; margin-top: 4px;">Identified academic priority band based on ensemble probability ({100 * prob:.1f}%). Deploy suggested behavioral counterfactual interventions below.</div>
         </div>
         ''', unsafe_allow_html=True)
 
@@ -643,13 +638,13 @@ elif page == 'Model Comparison':
     with c_plot2:
         if task == 'grade':
             fig = go.Figure()
-            fig.add_trace(go.Bar(name='Training RMSE', x=d.model, y=d.train_rmse, marker_color='#6C5636'))
-            fig.add_trace(go.Bar(name='Held-Out Test RMSE', x=d.model, y=d.test_rmse, marker_color='#B99D73'))
+            fig.add_trace(go.Bar(name='Training RMSE', x=d.model, y=d.train_rmse, marker_color='#64748B'))
+            fig.add_trace(go.Bar(name='Held-Out Test RMSE', x=d.model, y=d.test_rmse, marker_color='#162A45'))
             fig.update_layout(barmode='group', title='Train vs Held-Out Test RMSE (Generalization Gap)', xaxis_title=None)
         else:
             fig = go.Figure()
-            fig.add_trace(go.Bar(name='Training F1', x=d.model, y=d.train_f1, marker_color='#6C5636'))
-            fig.add_trace(go.Bar(name='Held-Out Test F1', x=d.model, y=d.test_f1, marker_color='#B99D73'))
+            fig.add_trace(go.Bar(name='Training F1', x=d.model, y=d.train_f1, marker_color='#64748B'))
+            fig.add_trace(go.Bar(name='Held-Out Test F1', x=d.model, y=d.test_f1, marker_color='#162A45'))
             fig.update_layout(barmode='group', title='Train vs Held-Out Test F1 (Generalization Gap)', xaxis_title=None)
         st.plotly_chart(fig, use_container_width=True)
 
@@ -953,9 +948,9 @@ elif page == 'Explainability':
                         st.plotly_chart(fig_dev, use_container_width=True)
 
     st.markdown('''
-    <div class="card" style="border-left: 4px solid #6C5636; margin-top: 20px;">
-        <div style="font-weight: 700; color: #DFCDB4; font-size: 0.96rem;">Responsible AI & Attribution Governance</div>
-        <div style="font-size: 0.88rem; color: #B99D73; margin-top: 4px;">Feature attribution quantifies mathematical loss reduction during model optimization. Prescriptive intervention should always be accompanied by holistic academic guidance and student mentorship.</div>
+    <div class="card" style="border-left: 4px solid #162A45; margin-top: 20px;">
+        <div style="font-weight: 700; color: #162A45; font-size: 0.96rem;">Responsible AI & Attribution Governance</div>
+        <div style="font-size: 0.88rem; color: #5A606A; margin-top: 4px;">Feature attribution quantifies mathematical loss reduction during model optimization. Prescriptive intervention should always be accompanied by holistic academic guidance and student mentorship.</div>
     </div>
     ''', unsafe_allow_html=True)
 
@@ -981,15 +976,15 @@ elif page == 'Data Explorer':
 
         g1, g2 = st.columns(2)
         with g1:
-            fig = px.histogram(data, x='G3', nbins=21, title='Final Grade Distribution (G3: 0–20)', color_discrete_sequence=['#B99D73'])
-            fig.add_vline(x=9.5, line_dash='dash', line_color='#E06C53', annotation_text='Risk Cutoff (10)')
+            fig = px.histogram(data, x='G3', nbins=21, title='Final Grade Distribution (G3: 0–20)', color_discrete_sequence=['#162A45'])
+            fig.add_vline(x=9.5, line_dash='dash', line_color='#B93829', annotation_text='Risk Cutoff (10)')
             st.plotly_chart(fig, use_container_width=True)
         with g2:
             class_df = pd.DataFrame({
                 'Status': ['Not At Risk (G3 ≥ 10)', 'At Risk (G3 < 10)'],
                 'Count': [(data.G3 >= 10).sum(), (data.G3 < 10).sum()]
             })
-            fig = px.pie(class_df, names='Status', values='Count', title='Academic Risk Balance', color_discrete_sequence=['#B99D73', '#6C5636'], hole=0.35)
+            fig = px.pie(class_df, names='Status', values='Count', title='Academic Risk Balance', color_discrete_sequence=['#2D6A4F', '#B93829'], hole=0.35)
             st.plotly_chart(fig, use_container_width=True)
 
         st.markdown('### Correlation Structure (Academic Numeric Features)')
@@ -1017,9 +1012,9 @@ elif page == 'Syllabus Evidence':
         'Complete verifiable mapping of Weeks 13–16 machine learning syllabus concepts to production repository code.'
     )
     st.markdown('''
-    <div class="card" style="border-left: 4px solid #B99D73; margin-bottom: 20px;">
-        <div style="font-weight: 700; color: #F5F2EB; font-size: 1.05rem;">Verified Curriculum Proof & Code Architecture</div>
-        <div style="font-size: 0.88rem; color: #B99D73; margin-top: 4px;">Every core concept (Ensembles, Regularization, Bias-Variance, Neural Networks) is explicitly mapped to its exact source file, training protocol, and empirical benchmark evidence.</div>
+    <div class="card" style="border-left: 4px solid #162A45; margin-bottom: 20px;">
+        <div style="font-weight: 700; color: #162A45; font-size: 1.05rem;">Verified Curriculum Proof & Code Architecture</div>
+        <div style="font-size: 0.88rem; color: #5A606A; margin-top: 4px;">Every core concept (Ensembles, Regularization, Bias-Variance, Neural Networks) is explicitly mapped to its exact source file, training protocol, and empirical benchmark evidence.</div>
     </div>
     ''', unsafe_allow_html=True)
     st.markdown('### Weeks 13–14: Ensembles, Bias–Variance and Regularization')
@@ -1089,9 +1084,9 @@ elif page == 'Neural Network Lab':
 
     with nn_tab1:
         st.markdown('''
-        <div class="card" style="border-left: 4px solid #B99D73; margin-bottom: 20px;">
-            <div style="font-weight: 700; color: #F5F2EB; font-size: 1.05rem;">Deep Learning Optimization: SGD vs. Adam Convergence</div>
-            <div style="font-size: 0.88rem; color: #B99D73; margin-top: 4px;">Controlled 316/79 split evaluation. Comparing Stochastic Gradient Descent with Momentum against Adaptive Moment Estimation (Adam) on binary academic risk.</div>
+        <div class="card" style="border-left: 4px solid #162A45; margin-bottom: 20px;">
+            <div style="font-weight: 700; color: #162A45; font-size: 1.05rem;">Deep Learning Optimization: SGD vs. Adam Convergence</div>
+            <div style="font-size: 0.88rem; color: #5A606A; margin-top: 4px;">Controlled 316/79 split evaluation. Comparing Stochastic Gradient Descent with Momentum against Adaptive Moment Estimation (Adam) on binary academic risk.</div>
         </div>
         ''', unsafe_allow_html=True)
         artifacts = legacy_colab_results()
@@ -1124,15 +1119,15 @@ elif page == 'Neural Network Lab':
             artifacts = load_colab_artifacts()
             if not artifacts.compatible:
                 st.markdown('''
-                <div class="card" style="border-left: 4px solid #6C5636;">
-                    <div style="font-weight: 600; color: #DFCDB4;">Pre-Trained Deep Learning Export Inactive</div>
-                    <div style="font-size: 0.88rem; color: #B99D73; margin-top: 4px;">Explore live model training in Tab 2 to benchmark custom architectures in real-time.</div>
+                <div class="card" style="border-left: 4px solid #64748B;">
+                    <div style="font-weight: 600; color: #162A45;">Pre-Trained Deep Learning Export Inactive</div>
+                    <div style="font-size: 0.88rem; color: #5A606A; margin-top: 4px;">Explore live model training in Tab 2 to benchmark custom architectures in real-time.</div>
                 </div>
                 ''', unsafe_allow_html=True)
             elif not legacy_colab_results().compatible:
                 st.markdown(f'''
-                <div class="card" style="border-left: 4px solid #B99D73;">
-                    <div style="font-weight: 600; color: #F5F2EB;">Export Source: {artifacts.manifest['source']}</div>
+                <div class="card" style="border-left: 4px solid #162A45;">
+                    <div style="font-weight: 600; color: #162A45;">Export Source: {artifacts.manifest['source']}</div>
                 </div>
                 ''', unsafe_allow_html=True)
                 optimizer = st.selectbox('Optimizer evidence to inspect', ['SGD', 'Adam'])
@@ -1196,9 +1191,9 @@ elif page == 'Neural Network Lab':
                 passed, max_err, tensor_errs = test_net.check_gradients(X_tr[:5], y_tr[:5], eps=1e-7)
                 if passed:
                     st.markdown(f'''
-                    <div class="card" style="border-left: 4px solid #B99D73; margin-top: 14px; background: #181510;">
-                        <div style="font-weight: 700; color: #DFCDB4; font-size: 1.05rem;">✓ Analytical Gradient Verification Passed</div>
-                        <div style="font-size: 0.88rem; color: #B99D73; margin-top: 4px;">Maximum relative error: {max_err:.2e} (&lt; 10⁻⁶). Analytical multivariate backpropagation derivatives match two-sided numerical finite-difference limits to machine precision.</div>
+                    <div class="card" style="border-left: 4px solid #2D6A4F; margin-top: 14px; background: #F8FAF8;">
+                        <div style="font-weight: 700; color: #2D6A4F; font-size: 1.05rem;">✓ Analytical Gradient Verification Passed</div>
+                        <div style="font-size: 0.88rem; color: #475569; margin-top: 4px;">Maximum relative error: {max_err:.2e} (&lt; 10⁻⁶). Analytical multivariate backpropagation derivatives match two-sided numerical finite-difference limits to machine precision.</div>
                     </div>
                     ''', unsafe_allow_html=True)
                     err_df = pd.DataFrame([{'Tensor': k, 'Relative Error': f'{v:.2e}', 'Status': 'EXACT'} for k, v in tensor_errs.items()])
