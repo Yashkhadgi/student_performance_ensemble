@@ -1,0 +1,6 @@
+Model,CV F1,Test Accuracy,Test Recall,Test F1
+LightGBM,0.8846,0.9241,0.8846,0.8846
+XGBoost,0.8706,0.9241,0.8846,0.8846
+Random Forest,0.863,0.8987,0.8462,0.8462
+Bagging,0.8539,0.9241,0.8846,0.8846
+Decision Tree,0.8071,0.8481,0.7692,0.7692

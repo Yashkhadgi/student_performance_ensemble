@@ -1,0 +1,9 @@
+Model,Configuration,L1 Alpha,L2 Lambda,Train RMSE,Validation RMSE,Gap
+XGBoost,None,0,0,0.6478,4.0009,3.3531
+XGBoost,L1 Only,5,0,1.0783,4.1292,3.051
+XGBoost,L2 Only,0,10,1.27,4.0518,2.7818
+XGBoost,L1 + L2,5,10,1.5693,4.0926,2.5233
+LightGBM,None,0,0,1.4495,4.0428,2.5933
+LightGBM,L1 Only,5,0,1.8469,4.0383,2.1914
+LightGBM,L2 Only,0,10,1.935,4.0234,2.0885
+LightGBM,L1 + L2,5,10,2.2027,4.0492,1.8464
