@@ -1,0 +1,704 @@
+{
+  "source": {
+    "status": "VERIFIED REAL UCI DATA",
+    "verified": true,
+    "synthetic": false,
+    "subject": "mat (Mathematics)",
+    "sha256": "e47f9ee225e1ee6e69b7564e6dac7123e80b8486677fe111f351964cef5dec80",
+    "sha256_short": "e47f9ee225e1",
+    "path": "/Users/yashkhadgi/Downloads/student_performance_ensemble_project/data/raw/student-mat.csv",
+    "name": "student-mat.csv",
+    "description": "Official UCI Student Performance Mathematics dataset, verified by exact SHA-256 cryptographic match.",
+    "uci_url": "https://archive.ics.uci.edu/dataset/320/student+performance",
+    "citation": "Cortez, P. (2008). Student Performance. UCI Machine Learning Repository. https://doi.org/10.24432/C5TG7T"
+  },
+  "trained_at": "2026-10-14T05:54:32.766705+00:00",
+  "rows": 395,
+  "columns": 33,
+  "class_balance": {
+    "at_risk": 130,
+    "not_at_risk": 265,
+    "risk_rate": 0.3291
+  },
+  "seed": 42,
+  "test_fraction": 0.2,
+  "cv_folds": 3,
+  "fast": false,
+  "models": {
+    "early__grade__decision_tree": {
+      "scenario": "early",
+      "task": "grade",
+      "name": "Decision Tree",
+      "file": "early__grade__decision_tree.joblib",
+      "params": {
+        "max_depth": 2,
+        "min_samples_leaf": 5,
+        "ccp_alpha": 0.01
+      },
+      "cv_mean": -4.073264096674435,
+      "cv_std": 0.3169340421304632,
+      "test_metrics": {
+        "mae": 2.92373,
+        "rmse": 3.97026,
+        "r2": 0.25538,
+        "max_error": 12.2766
+      }
+    },
+    "early__grade__bagging": {
+      "scenario": "early",
+      "task": "grade",
+      "name": "Bagging",
+      "file": "early__grade__bagging.joblib",
+      "params": {},
+      "cv_mean": -3.902487729876628,
+      "cv_std": 0.3363107307639514,
+      "test_metrics": {
+        "mae": 2.89967,
+        "rmse": 3.95643,
+        "r2": 0.26056,
+        "max_error": 13.18466
+      }
+    },
+    "early__grade__random_forest": {
+      "scenario": "early",
+      "task": "grade",
+      "name": "Random Forest",
+      "file": "early__grade__random_forest.joblib",
+      "params": {},
+      "cv_mean": -3.8954431048227867,
+      "cv_std": 0.3098395735753689,
+      "test_metrics": {
+        "mae": 2.91516,
+        "rmse": 3.97179,
+        "r2": 0.2548,
+        "max_error": 13.6748
+      }
+    },
+    "early__grade__xgboost": {
+      "scenario": "early",
+      "task": "grade",
+      "name": "XGBoost",
+      "file": "early__grade__xgboost.joblib",
+      "params": {
+        "n_estimators": 70,
+        "max_depth": 2,
+        "learning_rate": 0.08,
+        "reg_alpha": 1.0,
+        "reg_lambda": 8.0
+      },
+      "cv_mean": -4.038769465887806,
+      "cv_std": 0.3623021331769818,
+      "test_metrics": {
+        "mae": 3.06286,
+        "rmse": 3.92885,
+        "r2": 0.27083,
+        "max_error": 12.17148
+      }
+    },
+    "early__grade__lightgbm": {
+      "scenario": "early",
+      "task": "grade",
+      "name": "LightGBM",
+      "file": "early__grade__lightgbm.joblib",
+      "params": {
+        "n_estimators": 90,
+        "num_leaves": 7,
+        "max_depth": 3,
+        "min_child_samples": 20,
+        "reg_lambda": 8.0
+      },
+      "cv_mean": -4.023900200064712,
+      "cv_std": 0.47560380208648806,
+      "test_metrics": {
+        "mae": 3.09186,
+        "rmse": 3.91925,
+        "r2": 0.27439,
+        "max_error": 11.79569
+      }
+    },
+    "early__risk__decision_tree": {
+      "scenario": "early",
+      "task": "risk",
+      "name": "Decision Tree",
+      "file": "early__risk__decision_tree.joblib",
+      "params": {},
+      "cv_mean": 0.42015639264875165,
+      "cv_std": 0.03566436871645895,
+      "test_metrics": {
+        "accuracy": 0.70886,
+        "precision": 0.61538,
+        "recall": 0.30769,
+        "f1": 0.41026,
+        "roc_auc": 0.60631,
+        "brier_score": 0.24172
+      }
+    },
+    "early__risk__bagging": {
+      "scenario": "early",
+      "task": "risk",
+      "name": "Bagging",
+      "file": "early__risk__bagging.joblib",
+      "params": {
+        "n_estimators": 100,
+        "max_features": 0.9
+      },
+      "cv_mean": 0.4479616705439238,
+      "cv_std": 0.10413517863675587,
+      "test_metrics": {
+        "accuracy": 0.73418,
+        "precision": 0.69231,
+        "recall": 0.34615,
+        "f1": 0.46154,
+        "roc_auc": 0.74673,
+        "brier_score": 0.18772
+      }
+    },
+    "early__risk__random_forest": {
+      "scenario": "early",
+      "task": "risk",
+      "name": "Random Forest",
+      "file": "early__risk__random_forest.joblib",
+      "params": {},
+      "cv_mean": 0.29043771043771044,
+      "cv_std": 0.08421380927399648,
+      "test_metrics": {
+        "accuracy": 0.6962,
+        "precision": 0.625,
+        "recall": 0.19231,
+        "f1": 0.29412,
+        "roc_auc": 0.70464,
+        "brier_score": 0.19772
+      }
+    },
+    "early__risk__xgboost": {
+      "scenario": "early",
+      "task": "risk",
+      "name": "XGBoost",
+      "file": "early__risk__xgboost.joblib",
+      "params": {
+        "n_estimators": 170,
+        "max_depth": 4,
+        "learning_rate": 0.04,
+        "reg_alpha": 0.0,
+        "reg_lambda": 1.0
+      },
+      "cv_mean": 0.41884585678031555,
+      "cv_std": 0.057089396259274054,
+      "test_metrics": {
+        "accuracy": 0.75949,
+        "precision": 0.70588,
+        "recall": 0.46154,
+        "f1": 0.55814,
+        "roc_auc": 0.73077,
+        "brier_score": 0.18846
+      }
+    },
+    "early__risk__lightgbm": {
+      "scenario": "early",
+      "task": "risk",
+      "name": "LightGBM",
+      "file": "early__risk__lightgbm.joblib",
+      "params": {},
+      "cv_mean": 0.445957785742732,
+      "cv_std": 0.051913051673535375,
+      "test_metrics": {
+        "accuracy": 0.73418,
+        "precision": 0.63158,
+        "recall": 0.46154,
+        "f1": 0.53333,
+        "roc_auc": 0.74456,
+        "brier_score": 0.18533
+      }
+    },
+    "grade_informed__grade__decision_tree": {
+      "scenario": "grade_informed",
+      "task": "grade",
+      "name": "Decision Tree",
+      "file": "grade_informed__grade__decision_tree.joblib",
+      "params": {
+        "max_depth": 8,
+        "min_samples_leaf": 5,
+        "ccp_alpha": 0.02
+      },
+      "cv_mean": -1.9810424022692723,
+      "cv_std": 0.15288267296567362,
+      "test_metrics": {
+        "mae": 0.77686,
+        "rmse": 1.21833,
+        "r2": 0.92988,
+        "max_error": 6.375
+      }
+    },
+    "grade_informed__grade__bagging": {
+      "scenario": "grade_informed",
+      "task": "grade",
+      "name": "Bagging",
+      "file": "grade_informed__grade__bagging.joblib",
+      "params": {},
+      "cv_mean": -1.6750243522551387,
+      "cv_std": 0.2400381485944728,
+      "test_metrics": {
+        "mae": 0.79371,
+        "rmse": 1.23813,
+        "r2": 0.92758,
+        "max_error": 5.80077
+      }
+    },
+    "grade_informed__grade__random_forest": {
+      "scenario": "grade_informed",
+      "task": "grade",
+      "name": "Random Forest",
+      "file": "grade_informed__grade__random_forest.joblib",
+      "params": {},
+      "cv_mean": -1.6678805452206948,
+      "cv_std": 0.231376285886197,
+      "test_metrics": {
+        "mae": 0.8124,
+        "rmse": 1.25299,
+        "r2": 0.92584,
+        "max_error": 5.64379
+      }
+    },
+    "grade_informed__grade__xgboost": {
+      "scenario": "grade_informed",
+      "task": "grade",
+      "name": "XGBoost",
+      "file": "grade_informed__grade__xgboost.joblib",
+      "params": {
+        "n_estimators": 70,
+        "max_depth": 2,
+        "learning_rate": 0.08,
+        "reg_alpha": 1.0,
+        "reg_lambda": 8.0
+      },
+      "cv_mean": -1.7214452014039783,
+      "cv_std": 0.2268283672743491,
+      "test_metrics": {
+        "mae": 0.91271,
+        "rmse": 1.37672,
+        "r2": 0.91047,
+        "max_error": 6.03129
+      }
+    },
+    "grade_informed__grade__lightgbm": {
+      "scenario": "grade_informed",
+      "task": "grade",
+      "name": "LightGBM",
+      "file": "grade_informed__grade__lightgbm.joblib",
+      "params": {},
+      "cv_mean": -1.6845680657335624,
+      "cv_std": 0.17428386636216414,
+      "test_metrics": {
+        "mae": 0.81773,
+        "rmse": 1.21629,
+        "r2": 0.93012,
+        "max_error": 4.68032
+      }
+    },
+    "grade_informed__risk__decision_tree": {
+      "scenario": "grade_informed",
+      "task": "risk",
+      "name": "Decision Tree",
+      "file": "grade_informed__risk__decision_tree.joblib",
+      "params": {
+        "max_depth": 2,
+        "min_samples_leaf": 5,
+        "ccp_alpha": 0.01
+      },
+      "cv_mean": 0.8915752186083381,
+      "cv_std": 0.0306069959822695,
+      "test_metrics": {
+        "accuracy": 0.89873,
+        "precision": 0.82143,
+        "recall": 0.88462,
+        "f1": 0.85185,
+        "roc_auc": 0.91872,
+        "brier_score": 0.07913
+      }
+    },
+    "grade_informed__risk__bagging": {
+      "scenario": "grade_informed",
+      "task": "risk",
+      "name": "Bagging",
+      "file": "grade_informed__risk__bagging.joblib",
+      "params": {
+        "n_estimators": 100,
+        "max_features": 0.9
+      },
+      "cv_mean": 0.8800178850883076,
+      "cv_std": 0.03507840810694329,
+      "test_metrics": {
+        "accuracy": 0.91139,
+        "precision": 0.85185,
+        "recall": 0.88462,
+        "f1": 0.86792,
+        "roc_auc": 0.96444,
+        "brier_score": 0.06868
+      }
+    },
+    "grade_informed__risk__random_forest": {
+      "scenario": "grade_informed",
+      "task": "risk",
+      "name": "Random Forest",
+      "file": "grade_informed__risk__random_forest.joblib",
+      "params": {
+        "n_estimators": 160,
+        "max_depth": null,
+        "min_samples_leaf": 3
+      },
+      "cv_mean": 0.8684512386120486,
+      "cv_std": 0.055898368639374585,
+      "test_metrics": {
+        "accuracy": 0.92405,
+        "precision": 0.88462,
+        "recall": 0.88462,
+        "f1": 0.88462,
+        "roc_auc": 0.96734,
+        "brier_score": 0.08292
+      }
+    },
+    "grade_informed__risk__xgboost": {
+      "scenario": "grade_informed",
+      "task": "risk",
+      "name": "XGBoost",
+      "file": "grade_informed__risk__xgboost.joblib",
+      "params": {
+        "n_estimators": 70,
+        "max_depth": 2,
+        "learning_rate": 0.08,
+        "reg_alpha": 1.0,
+        "reg_lambda": 8.0
+      },
+      "cv_mean": 0.8819308545335942,
+      "cv_std": 0.03505552209404932,
+      "test_metrics": {
+        "accuracy": 0.89873,
+        "precision": 0.82143,
+        "recall": 0.88462,
+        "f1": 0.85185,
+        "roc_auc": 0.97206,
+        "brier_score": 0.0693
+      }
+    },
+    "grade_informed__risk__lightgbm": {
+      "scenario": "grade_informed",
+      "task": "risk",
+      "name": "LightGBM",
+      "file": "grade_informed__risk__lightgbm.joblib",
+      "params": {
+        "n_estimators": 90,
+        "num_leaves": 7,
+        "max_depth": 3,
+        "min_child_samples": 20,
+        "reg_lambda": 8.0
+      },
+      "cv_mean": 0.884973544973545,
+      "cv_std": 0.0420810252633512,
+      "test_metrics": {
+        "accuracy": 0.92405,
+        "precision": 0.88462,
+        "recall": 0.88462,
+        "f1": 0.88462,
+        "roc_auc": 0.9688,
+        "brier_score": 0.06898
+      }
+    }
+  },
+  "schema": {
+    "early": {
+      "fields": [
+        "school",
+        "sex",
+        "age",
+        "address",
+        "famsize",
+        "Pstatus",
+        "Medu",
+        "Fedu",
+        "Mjob",
+        "Fjob",
+        "reason",
+        "guardian",
+        "traveltime",
+        "studytime",
+        "failures",
+        "schoolsup",
+        "famsup",
+        "paid",
+        "activities",
+        "nursery",
+        "higher",
+        "internet",
+        "romantic",
+        "famrel",
+        "freetime",
+        "goout",
+        "Dalc",
+        "Walc",
+        "health",
+        "absences"
+      ],
+      "defaults": {
+        "school": "GP",
+        "sex": "F",
+        "age": 17.0,
+        "address": "U",
+        "famsize": "GT3",
+        "Pstatus": "T",
+        "Medu": 3.0,
+        "Fedu": 2.0,
+        "Mjob": "other",
+        "Fjob": "other",
+        "reason": "course",
+        "guardian": "mother",
+        "traveltime": 1.0,
+        "studytime": 2.0,
+        "failures": 0.0,
+        "schoolsup": "no",
+        "famsup": "yes",
+        "paid": "no",
+        "activities": "yes",
+        "nursery": "yes",
+        "higher": "yes",
+        "internet": "yes",
+        "romantic": "no",
+        "famrel": 4.0,
+        "freetime": 3.0,
+        "goout": 3.0,
+        "Dalc": 1.0,
+        "Walc": 2.0,
+        "health": 4.0,
+        "absences": 4.0
+      },
+      "options": {
+        "school": [
+          "GP",
+          "MS"
+        ],
+        "sex": [
+          "F",
+          "M"
+        ],
+        "address": [
+          "R",
+          "U"
+        ],
+        "famsize": [
+          "GT3",
+          "LE3"
+        ],
+        "Pstatus": [
+          "A",
+          "T"
+        ],
+        "Mjob": [
+          "at_home",
+          "health",
+          "other",
+          "services",
+          "teacher"
+        ],
+        "Fjob": [
+          "at_home",
+          "health",
+          "other",
+          "services",
+          "teacher"
+        ],
+        "reason": [
+          "course",
+          "home",
+          "other",
+          "reputation"
+        ],
+        "guardian": [
+          "father",
+          "mother",
+          "other"
+        ],
+        "schoolsup": [
+          "no",
+          "yes"
+        ],
+        "famsup": [
+          "no",
+          "yes"
+        ],
+        "paid": [
+          "no",
+          "yes"
+        ],
+        "activities": [
+          "no",
+          "yes"
+        ],
+        "nursery": [
+          "no",
+          "yes"
+        ],
+        "higher": [
+          "no",
+          "yes"
+        ],
+        "internet": [
+          "no",
+          "yes"
+        ],
+        "romantic": [
+          "no",
+          "yes"
+        ]
+      }
+    },
+    "grade_informed": {
+      "fields": [
+        "school",
+        "sex",
+        "age",
+        "address",
+        "famsize",
+        "Pstatus",
+        "Medu",
+        "Fedu",
+        "Mjob",
+        "Fjob",
+        "reason",
+        "guardian",
+        "traveltime",
+        "studytime",
+        "failures",
+        "schoolsup",
+        "famsup",
+        "paid",
+        "activities",
+        "nursery",
+        "higher",
+        "internet",
+        "romantic",
+        "famrel",
+        "freetime",
+        "goout",
+        "Dalc",
+        "Walc",
+        "health",
+        "absences",
+        "G1",
+        "G2"
+      ],
+      "defaults": {
+        "school": "GP",
+        "sex": "F",
+        "age": 17.0,
+        "address": "U",
+        "famsize": "GT3",
+        "Pstatus": "T",
+        "Medu": 3.0,
+        "Fedu": 2.0,
+        "Mjob": "other",
+        "Fjob": "other",
+        "reason": "course",
+        "guardian": "mother",
+        "traveltime": 1.0,
+        "studytime": 2.0,
+        "failures": 0.0,
+        "schoolsup": "no",
+        "famsup": "yes",
+        "paid": "no",
+        "activities": "yes",
+        "nursery": "yes",
+        "higher": "yes",
+        "internet": "yes",
+        "romantic": "no",
+        "famrel": 4.0,
+        "freetime": 3.0,
+        "goout": 3.0,
+        "Dalc": 1.0,
+        "Walc": 2.0,
+        "health": 4.0,
+        "absences": 4.0,
+        "G1": 11.0,
+        "G2": 11.0
+      },
+      "options": {
+        "school": [
+          "GP",
+          "MS"
+        ],
+        "sex": [
+          "F",
+          "M"
+        ],
+        "address": [
+          "R",
+          "U"
+        ],
+        "famsize": [
+          "GT3",
+          "LE3"
+        ],
+        "Pstatus": [
+          "A",
+          "T"
+        ],
+        "Mjob": [
+          "at_home",
+          "health",
+          "other",
+          "services",
+          "teacher"
+        ],
+        "Fjob": [
+          "at_home",
+          "health",
+          "other",
+          "services",
+          "teacher"
+        ],
+        "reason": [
+          "course",
+          "home",
+          "other",
+          "reputation"
+        ],
+        "guardian": [
+          "father",
+          "mother",
+          "other"
+        ],
+        "schoolsup": [
+          "no",
+          "yes"
+        ],
+        "famsup": [
+          "no",
+          "yes"
+        ],
+        "paid": [
+          "no",
+          "yes"
+        ],
+        "activities": [
+          "no",
+          "yes"
+        ],
+        "nursery": [
+          "no",
+          "yes"
+        ],
+        "higher": [
+          "no",
+          "yes"
+        ],
+        "internet": [
+          "no",
+          "yes"
+        ],
+        "romantic": [
+          "no",
+          "yes"
+        ]
+      }
+    }
+  },
+  "notes": "CV uses training data only. Held-out test metrics are for final reporting, not model selection."
+}
