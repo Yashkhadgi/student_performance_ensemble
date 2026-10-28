@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.DS_Store
+*.py[cod]
+.ipynb_checkpoints/
+data/active_dataset.csv

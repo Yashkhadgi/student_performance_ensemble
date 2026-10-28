@@ -1,0 +1,6 @@
+Student Performance Ensemble Lab v1.1.0
+Created & Audited: 2026-10-14
+Platform: macOS (Apple Silicon M1, Python 3.9.6)
+Dataset Status: VERIFIED REAL UCI DATA (student-mat.csv, SHA-256: e47f9ee225e1ee6e...)
+Coverage: 2 scenarios × 2 tasks × 5 models (20 trained pipelines), 4 notebooks, 7 dashboard pages.
+Compulsory Topics: Bagging, Boosting, Bias-Variance Tradeoff, Overfitting/Underfitting, Regularization.
