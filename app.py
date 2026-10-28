@@ -8,12 +8,26 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
+import plotly.io as pio
 import streamlit as st
 from sklearn.metrics import accuracy_score, confusion_matrix, f1_score, precision_score, recall_score, roc_auc_score
 from src.colab_artifacts import legacy_nn_probabilities, load_colab_artifacts, load_legacy_colab_exports
 from src.data import ROOT, feature_frame, load_data
 from src.models import MODELS, make_preprocessor
 from src.neural_net import NumPyNeuralNetwork
+
+# Palette: Charcoal (#090907), Earth Brown (#6C5636), Burnt Amber (#B99D73)
+pio.templates['charcoal_amber'] = go.layout.Template(
+    layout=go.Layout(
+        paper_bgcolor='#090907',
+        plot_bgcolor='#12110E',
+        font=dict(color='#F5F2EB', family='Plus Jakarta Sans, sans-serif'),
+        colorway=['#B99D73', '#6C5636', '#DFCDB4', '#947854', '#53422A', '#D48560'],
+        xaxis=dict(gridcolor='#25211B', zerolinecolor='#3E372D', linecolor='#3E372D'),
+        yaxis=dict(gridcolor='#25211B', zerolinecolor='#3E372D', linecolor='#3E372D'),
+    )
+)
+pio.templates.default = 'charcoal_amber'
 
 st.set_page_config(
     page_title='Student Ensemble Lab · Academic Risk Analysis',
@@ -23,54 +37,200 @@ st.set_page_config(
 )
 
 st.markdown('''<style>
-.block-container { padding-top: 2rem; max-width: 1440px; }
-[data-testid="stSidebar"] { background: #111626; }
-h1, h2, h3 { letter-spacing: -0.02em; }
-.hero {
-    padding: 24px 28px;
-    border-radius: 14px;
-    background: linear-gradient(130deg, #1b2438 0%, #15293d 100%);
-    border: 1px solid #364866;
-    margin-bottom: 20px;
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+html, body, [class*="css"] {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 }
-.hero h1 { color: #ffffff; margin: 0; font-size: 2.3rem; }
-.hero p { color: #b0c6de; margin: 8px 0 0; font-size: 1.05rem; }
+
+.block-container {
+    padding-top: 1.8rem;
+    padding-bottom: 3rem;
+    max-width: 1440px;
+}
+
+/* Sidebar Styling */
+[data-testid="stSidebar"] {
+    background: #0D0C0A;
+    border-right: 1px solid #28231C;
+}
+[data-testid="stSidebar"] h2 {
+    color: #B99D73;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+/* Top Hero Banner */
+.hero {
+    padding: 26px 32px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #1A1713 0%, #11100D 50%, #201A13 100%);
+    border: 1px solid #6C5636;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(185, 157, 115, 0.25);
+    margin-bottom: 24px;
+}
+.hero h1 {
+    color: #F5F2EB;
+    margin: 0;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+.hero p {
+    color: #B99D73;
+    margin: 8px 0 0;
+    font-size: 1.05rem;
+    font-weight: 400;
+}
+
+/* Status Badges */
 .status-pill-verified {
-    display: inline-block;
-    background: #143521;
-    border: 1px solid #2e7d32;
-    color: #a5d6a7;
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-size: 0.88rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #151D12;
+    border: 1px solid #415E2C;
+    color: #A8CE92;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 0.86rem;
     font-weight: 600;
+    letter-spacing: 0.02em;
 }
 .status-pill-synthetic {
-    display: inline-block;
-    background: #442a1e;
-    border: 1px solid #d9534f;
-    color: #ffab91;
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-size: 0.88rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #261612;
+    border: 1px solid #7D3728;
+    color: #EFA08F;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 0.86rem;
     font-weight: 600;
 }
 .status-pill-unverified {
-    display: inline-block;
-    background: #1c2e42;
-    border: 1px solid #1976d2;
-    color: #90caf9;
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-size: 0.88rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #1F1912;
+    border: 1px solid #6C5636;
+    color: #B99D73;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 0.86rem;
     font-weight: 600;
 }
+
+/* Luxury Metric Cards */
+[data-testid="stMetric"] {
+    background: #141310;
+    border: 1px solid #332B20;
+    border-top: 3px solid #B99D73;
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.15s ease, border-color 0.15s ease;
+}
+[data-testid="stMetric"]:hover {
+    border-color: #6C5636;
+    border-top-color: #DFCDB4;
+    transform: translateY(-2px);
+}
+[data-testid="stMetricLabel"] {
+    color: #B99D73 !important;
+    font-size: 0.88rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+[data-testid="stMetricValue"] {
+    color: #F5F2EB !important;
+    font-size: 1.85rem !important;
+    font-weight: 700 !important;
+}
+
+/* Luxury Containers & Cards */
 .card {
-    background: #182033;
-    border: 1px solid #2c3a54;
+    background: #141310;
+    border: 1px solid #332B20;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* Interactive Tabs */
+button[data-baseweb="tab"] {
+    color: #8C8476 !important;
+    font-weight: 500;
+    padding: 10px 20px !important;
+    border-radius: 8px 8px 0 0;
+    transition: color 0.15s ease;
+}
+button[data-baseweb="tab"][aria-selected="true"] {
+    color: #B99D73 !important;
+    border-bottom: 2px solid #B99D73 !important;
+    font-weight: 700;
+}
+
+/* Primary and Secondary Buttons */
+.stButton > button {
+    background: #1C1813;
+    color: #F5F2EB;
+    border: 1px solid #6C5636;
     border-radius: 10px;
-    padding: 16px;
-    margin-bottom: 14px;
+    padding: 10px 22px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: all 0.2s ease;
+}
+.stButton > button:hover {
+    background: #2A231A;
+    border-color: #B99D73;
+    color: #FFFFFF;
+    box-shadow: 0 4px 16px rgba(185, 157, 115, 0.2);
+}
+.stButton > button[kind="primary"] {
+    background: linear-gradient(135deg, #B99D73 0%, #9E8158 100%);
+    color: #090907 !important;
+    border: none;
+    font-weight: 700;
+    box-shadow: 0 4px 14px rgba(185, 157, 115, 0.3);
+}
+.stButton > button[kind="primary"]:hover {
+    background: linear-gradient(135deg, #CBB490 0%, #B19468 100%);
+    box-shadow: 0 6px 20px rgba(185, 157, 115, 0.5);
+    transform: translateY(-1px);
+}
+
+/* Form & Input Containers */
+[data-testid="stForm"] {
+    background: #12110E;
+    border: 1px solid #332B20;
+    border-radius: 14px;
+    padding: 24px;
+}
+
+/* Dataframe styling */
+[data-testid="stDataFrame"] {
+    border: 1px solid #2B251D;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Progress Bar */
+.stProgress > div > div > div > div {
+    background: linear-gradient(90deg, #6C5636 0%, #B99D73 100%);
+    border-radius: 6px;
+}
+
+/* Alert Boxes */
+[data-testid="stAlert"] {
+    background: #161410;
+    border: 1px solid #6C5636;
+    border-radius: 10px;
+    color: #F5F2EB;
 }
 </style>''', unsafe_allow_html=True)
 
@@ -503,13 +663,13 @@ elif page == 'Model Comparison':
     with c_plot2:
         if task == 'grade':
             fig = go.Figure()
-            fig.add_trace(go.Bar(name='Training RMSE', x=d.model, y=d.train_rmse, marker_color='#4a90e2'))
-            fig.add_trace(go.Bar(name='Held-Out Test RMSE', x=d.model, y=d.test_rmse, marker_color='#50e3c2'))
+            fig.add_trace(go.Bar(name='Training RMSE', x=d.model, y=d.train_rmse, marker_color='#6C5636'))
+            fig.add_trace(go.Bar(name='Held-Out Test RMSE', x=d.model, y=d.test_rmse, marker_color='#B99D73'))
             fig.update_layout(barmode='group', title='Train vs Held-Out Test RMSE (Generalization Gap)', xaxis_title=None)
         else:
             fig = go.Figure()
-            fig.add_trace(go.Bar(name='Training F1', x=d.model, y=d.train_f1, marker_color='#4a90e2'))
-            fig.add_trace(go.Bar(name='Held-Out Test F1', x=d.model, y=d.test_f1, marker_color='#50e3c2'))
+            fig.add_trace(go.Bar(name='Training F1', x=d.model, y=d.train_f1, marker_color='#6C5636'))
+            fig.add_trace(go.Bar(name='Held-Out Test F1', x=d.model, y=d.test_f1, marker_color='#B99D73'))
             fig.update_layout(barmode='group', title='Train vs Held-Out Test F1 (Generalization Gap)', xaxis_title=None)
         st.plotly_chart(fig, use_container_width=True)
 
@@ -840,15 +1000,15 @@ elif page == 'Data Explorer':
 
         g1, g2 = st.columns(2)
         with g1:
-            fig = px.histogram(data, x='G3', nbins=21, title='Final Grade Distribution (G3: 0–20)', color_discrete_sequence=['#4a90e2'])
-            fig.add_vline(x=9.5, line_dash='dash', line_color='red', annotation_text='Risk Cutoff (10)')
+            fig = px.histogram(data, x='G3', nbins=21, title='Final Grade Distribution (G3: 0–20)', color_discrete_sequence=['#B99D73'])
+            fig.add_vline(x=9.5, line_dash='dash', line_color='#E06C53', annotation_text='Risk Cutoff (10)')
             st.plotly_chart(fig, use_container_width=True)
         with g2:
             class_df = pd.DataFrame({
                 'Status': ['Not At Risk (G3 ≥ 10)', 'At Risk (G3 < 10)'],
                 'Count': [(data.G3 >= 10).sum(), (data.G3 < 10).sum()]
             })
-            fig = px.pie(class_df, names='Status', values='Count', title='Academic Risk Balance', color_discrete_sequence=['#2ecc71', '#e74c3c'], hole=0.35)
+            fig = px.pie(class_df, names='Status', values='Count', title='Academic Risk Balance', color_discrete_sequence=['#B99D73', '#6C5636'], hole=0.35)
             st.plotly_chart(fig, use_container_width=True)
 
         st.markdown('### Correlation Structure (Academic Numeric Features)')
